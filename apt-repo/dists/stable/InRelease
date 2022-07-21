@@ -1,0 +1,37 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Date: Tue, 19 Jul 2022 07:04:06 +0000
+MD5Sum:
+ 4d8ea12b430af0a92f37e31c524c0430               38 Release
+ 8eb2fbae11c615f1a626adf12d19b251              438 main/binary-amd64/Packages
+ 062c14a6cde3fb5e7047449288b13398              326 main/binary-amd64/Packages.gz
+SHA1:
+ a52c351352bf7bdcd733c0b1b798f59f21916385               38 Release
+ 4885f545c29260924f58853f5417291656a9915b              438 main/binary-amd64/Packages
+ c3e36696fe443261a54c0240307748dac9012a04              326 main/binary-amd64/Packages.gz
+SHA256:
+ 63852a49992a9cb9abd0433a3cb84c5030c905d76111f948f8f28494c068b6e0               38 Release
+ 780152895838fe890399c430215b24137326ca6be81577b778c6bf894e855424              438 main/binary-amd64/Packages
+ aee46fbcb6817a3f6a118b5abf0b290a2eef1ae5495e9da24514132f47b892f0              326 main/binary-amd64/Packages.gz
+SHA512:
+ de6e58529a40a84e5d7f15177996e6200499fd4014cc21f8363908f1513634b3d3904eae36ad4e8707ad16b3a71dbf636bbe8fad8fd7cc033443be20ba08e6e5               38 Release
+ cb20da14f57459986f16bdbd5416c41875f5d73bf60921c72a4a78c435d2266d54111db3bcd452825a0831d0c52553f0277c68fc50ecb66164705fcddc3053e8              438 main/binary-amd64/Packages
+ 6de9529ac81e0a0c8f259ad679352b2fcab5b1ad56697a966c4dc4bd604f7e24d41eed3cd8ef97611b7f172a048c7ff156eec98f2502f803163ffe238ce58263              326 main/binary-amd64/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQJIBAEBCgAyFiEEYw25aongRB9AqJLMVQTN7cfrspQFAmLY3OEUHGV4YW1wbGVA
+ZXhhbXBsZS5jb20ACgkQVQTN7cfrspQ5Fw//dtXHz5Q3iHhIzyIT+CYNoQRYT/EK
+Q1Xw2HMwXDXZ49DDPVy+vi5ebTCVg2dd2iM/4a+5QKrMEyV8v3neVAw1IUIzGduv
+jj1knrXy8bBxpOQkCupY2xUq4hLkOBKupJgZfi7s1Lmo6eGd9aAtVtbf6kUmkgX0
+M+cm2j5+OQdw9QGVsdD1ylm9CopoSePJPbX1gTtOHGUKw1u29kHrBCv1JxKpjFbN
+OCqnwkcQB3yvuodm4HX8C7xnCm657n8sHx2akjOHGymrvdaB8vVyRTYxa1XFX8Ts
+ldTrdq1x0Il73dXcTlm2OzER8ao6m6t0l30X5kah5bIUcKxoRw2Fvs8t9EfTx+eW
+f3NAYpW1KePity/NmaHmFG57b37juL0ZhLMA4j06gS6m+An45vfw6K3jPQYw/q+s
+nHwWTZgw6G+WZmhA2Qm1tgM7Qyt5YDtxnnZJyytMrMtT8HYRqreCUabF9Kx0maF0
+dC0aLG0MLSn+gtAPFNQsGHnJ7yvAA5E1Eh0t+3I4MMHYik1CjcpzuQc9yXlGJJ+r
+fVugFCFuRIhURWEVOnLvkdk4AV2KjHgfzl6+kOS1iXPgw2hfPrcmBfztcDmXg0cG
+iSctxXvpo9Fy7JfFdC4EHWdxMPI5SKZsNuazkj0gxr6DXhNR2YGemBpyzVjc0AWy
+ZlJOVbFk5fBhpc4=
+=dk2C
+-----END PGP SIGNATURE-----
