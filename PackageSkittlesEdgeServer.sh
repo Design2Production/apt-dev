@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash shopt -s extglob
 set -x #echo on
 echo "Package SkittlesEdgeServer..."
 echo
@@ -6,8 +6,9 @@ packageName="$1"
 version=$2
 release=$3
 architecture="amd64"
-_="_"
+us="_"
 sourceFolder="$4"
+destinationFolder="CodeForPackaging"
 
 if [ "$packageName" = "" ] ; then
    echo "Package Name must be specified"
@@ -37,16 +38,23 @@ else
    echo "Source Folder    : $sourceFolder"
 fi
 
-fullPackageName="$packageName$_$version$_$release$_$architecture"
+fullPackageName="$packageName$us$version$us$release$us$architecture"
+configFolder="$destinationFolder/$fullPackageName/etc/DP/EdgeServer/"
+appInstallationFolder="$destinationFolder/$fullPackageName/Documents/SkittlesEdgeServer"
+debianFolder="$destinationFolder/$fullPackageName/DEBIAN"
 
 echo "Full Package Name : $fullPackageName"
 
-rm -r $fullPackageName
-mkdir -p $fullPackageName/usr/bin
-cp -r $sourceFolder/SkittlesEdgeServer $fullPackageName/usr/bin
-chmod 777 $fullPackageName/usr/bin/SkittlesEdgeServer/SkittlesVending.EdgeServer
+rm -r $destinationFolder/$fullPackageName
+mkdir -p $configFolder
+cp -r $sourceFolder/SkittlesEdgeServer/appsettings*.json $configFolder
+mkdir -p $appInstallationFolder
+rsync -av --exclude 'appsettings*.json' $sourceFolder/SkittlesEdgeServer/ $appInstallationFolder
+chmod 777 "$appInstallationFolder/SkittlesEdgeServer/SkittlesVending.EdgeServer"
 
-mkdir -p $fullPackageName/DEBIAN
+
+mkdir -p $debianFolder
+rm deb/$fullPackageName.deb
 
 echo "Package: $packageName
 Version: $version
@@ -55,6 +63,6 @@ Depends:
 Architecture: amd64
 Homepage: http://d-p.com.au
 Description: Skittles Edge Server Application" \
-> $fullPackageName/DEBIAN/control
+> $debianFolder/control
 
-dpkg-deb --build $fullPackageName
+dpkg-deb --build $destinationFolder/$fullPackageName deb/$fullPackageName.deb

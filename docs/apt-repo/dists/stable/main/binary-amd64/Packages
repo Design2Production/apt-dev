@@ -2,11 +2,23 @@ Package: skittles-edge-server
 Version: 0.0.1
 Architecture: amd64
 Maintainer: Design to Production <support@d-p.com.au>
-Filename: apt-repo/pool/main/skittles-edge-server_0.0.1_1_amd64.deb
-Size: 78052222
-MD5sum: 46c90c41e4dc5296a13ce91a2a3536ed
-SHA1: f6d5d41dffb30b5700688a8558828a2b664cf106
-SHA256: 78dd89230ee971b0277e5c20f053c2ff29902dd60944f141331d37f71a86950a
+Filename: docs/apt-repo/pool/main/skittles-edge-server_0.0.1_1_amd64.deb
+Size: 78049054
+MD5sum: ebdc0950b12f3a960e93e81b6508bc06
+SHA1: 3c077242e294a890106fc07337d9b62afb84bdfc
+SHA256: ac40a769617d348d3d91d97168978d2ef8a7b8f43d90f51b2fdb372c9bd747a8
+Homepage: http://d-p.com.au
+Description: Skittles Edge Server Application
+
+Package: skittles-edge-server
+Version: 0.0.2
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: docs/apt-repo/pool/main/skittles-edge-server_0.0.2_1_amd64.deb
+Size: 78049148
+MD5sum: 031c88099631a25c95231ec8f32ad851
+SHA1: 213aa74ab749e86cf591fed7b82c1835bcc9cf47
+SHA256: 04248626cf86e4062ff626c8d87d67e77093d3d334e3af751e358fe203fc4fbd
 Homepage: http://d-p.com.au
 Description: Skittles Edge Server Application
 

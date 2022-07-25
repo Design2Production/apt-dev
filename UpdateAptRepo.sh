@@ -1,16 +1,16 @@
 #!/bin/bash
 set -x #echo on
-echo "Create Apt Repo..."
+echo "Update apt-repo..."
 echo
 
-mkdir -p apt-repo/pool/main
+#mkdir -p apt-repo/pool/main
 
-cp *.deb apt-repo/pool/main/.
+cp deb/*.deb docs/apt-repo/pool/main/.
 
-mkdir -p apt-repo/dists/stable/main/binary-amd64
+#mkdir -p apt-repo/dists/stable/main/binary-amd64
 
-dpkg-scanpackages --arch amd64 apt-repo/pool/ > apt-repo/dists/stable/main/binary-amd64/Packages
+dpkg-scanpackages --multiversion --arch amd64 docs/apt-repo/pool/ > docs/apt-repo/dists/stable/main/binary-amd64/Packages
 
-cat apt-repo/dists/stable/main/binary-amd64/Packages | gzip -9 > apt-repo/dists/stable/main/binary-amd64/Packages.gz
+cat docs/apt-repo/dists/stable/main/binary-amd64/Packages | gzip -9 > docs/apt-repo/dists/stable/main/binary-amd64/Packages.gz
 
-apt-ftparchive release apt-repo/dists/stable/ > apt-repo/dists/stable/Release
+apt-ftparchive release docs/apt-repo/dists/stable/ > docs/apt-repo/dists/stable/Release
