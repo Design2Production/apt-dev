@@ -39,18 +39,18 @@ else
 fi
 
 fullPackageName="$packageName$us$version$us$release$us$architecture"
-configFolder="$destinationFolder/$fullPackageName/etc/DP/EdgeServer/"
-appInstallationFolder="$destinationFolder/$fullPackageName/Documents/SkittlesEdgeServer"
+configFolder="$destinationFolder/$fullPackageName/etc/$packageName/"
+appInstallationFolder="$destinationFolder/$fullPackageName/usr/lib/$packageName"
 debianFolder="$destinationFolder/$fullPackageName/DEBIAN"
 
 echo "Full Package Name : $fullPackageName"
 
 rm -r $destinationFolder/$fullPackageName
 mkdir -p $configFolder
-cp -r $sourceFolder/SkittlesEdgeServer/appsettings*.json $configFolder
+cp -r $sourceFolder/appsettings*.json $configFolder
 mkdir -p $appInstallationFolder
-rsync -av --exclude 'appsettings*.json' $sourceFolder/SkittlesEdgeServer/ $appInstallationFolder
-chmod 777 "$appInstallationFolder/SkittlesEdgeServer/SkittlesVending.EdgeServer"
+rsync -av --exclude 'appsettings*.json' $sourceFolder/ $appInstallationFolder
+chmod 777 "$appInstallationFolder/SkittlesVending.EdgeServer"
 
 
 mkdir -p $debianFolder
