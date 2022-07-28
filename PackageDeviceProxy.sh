@@ -58,7 +58,7 @@ cp -r $sourceFolder/data.json $dataFolder
 mkdir -p $cacheFolder
 
 mkdir -p $appInstallationFolder
-rsync -av --exclude 'appsettings*.json' --exclude 'setting.json' --exclude 'data.json' $sourceFolder/ $appInstallationFolder
+rsync -av --exclude --exclude 'setting.json' --exclude 'data.json' $sourceFolder/ $appInstallationFolder
 chmod 777 "$appInstallationFolder/DeviceProxy"
 
 
