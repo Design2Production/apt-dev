@@ -66,7 +66,7 @@ mkdir -p $debianFolder
 rm deb/$fullPackageName.deb
 
 echo "Package: $packageName
-Version: $version
+Version: $version-$release
 Maintainer: Design to Production <support@d-p.com.au>
 Depends:
 Architecture: amd64
