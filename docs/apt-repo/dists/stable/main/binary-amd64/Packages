@@ -1,3 +1,15 @@
+Package: dp-device-proxy
+Version: 1.7.3
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: pool/main/dp-device-proxy_1.7.3_1_amd64.deb
+Size: 46566922
+MD5sum: 45a180fbbca30af2362d655f6640443c
+SHA1: a32aef0e0319904e789e3739b2abbc34841d3043
+SHA256: cdb90925566225cf66480cbac9c9ab3f006aa054b118e2d623eaa266f1e735d9
+Homepage: http://d-p.com.au
+Description: DP Device Proxy Application
+
 Package: skittles-edge-server
 Version: 0.0.1
 Architecture: amd64
