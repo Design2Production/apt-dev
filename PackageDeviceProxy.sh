@@ -74,4 +74,8 @@ Homepage: http://d-p.com.au
 Description: DP Device Proxy Application" \
 > $debianFolder/control
 
+echo "$configFolder/setting.json
+$dataFolder/data.json" \
+> @debianFolder/conffiles
+
 dpkg-deb --build $destinationFolder/$fullPackageName deb/$fullPackageName.deb
