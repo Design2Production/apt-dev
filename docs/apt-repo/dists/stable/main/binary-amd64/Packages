@@ -34,3 +34,15 @@ SHA256: d22c9efd1215fc0ca30456920a3e31ab257e63e21a603569e56be4659790d9f2
 Homepage: http://d-p.com.au
 Description: Skittles Edge Server Application
 
+Package: skittles-edge-server
+Version: 0.0.4
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: pool/main/skittles-edge-server_0.0.4_1_amd64.deb
+Size: 78051112
+MD5sum: 0bd10892da0c70b4b0764b238c56b6db
+SHA1: 5c103490a354622a757ef31c8be772a37c54a71d
+SHA256: 9dd2ea72d30143e00e641d7a6e436d3f43c56f8f27ebe3aa94e4c21b5befddb6
+Homepage: http://d-p.com.au
+Description: Skittles Edge Server Application
+
