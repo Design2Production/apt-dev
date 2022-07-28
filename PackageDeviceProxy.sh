@@ -39,9 +39,15 @@ else
 fi
 
 fullPackageName="$packageName$us$version$us$release$us$architecture"
-configFolder="$destinationFolder/$fullPackageName/etc/$packageName/"
-dataFolder="$destinationFolder/$fullPackageName/var/lib/$packageName/"
-cacheFolder="$destinationFolder/$fullPackageName/var/cache/$packageName/"
+
+configFolder="/etc/$packageName/"
+destinationConfigFolder="$destinationFolder/$fullPackageName$configFolder"
+
+dataFolder="/var/lib/$packageName/"
+destinationDataFolder="$destinationFolder/$fullPackageName$dataFolder"
+
+cacheFolder="/var/cache/$packageName/"
+destinationCacheFolder="$destinationFolder/$fullPackageName$cacheFolder"
 appInstallationFolder="$destinationFolder/$fullPackageName/usr/lib/$packageName"
 debianFolder="$destinationFolder/$fullPackageName/DEBIAN"
 
@@ -49,13 +55,13 @@ echo "Full Package Name : $fullPackageName"
 
 rm -r $destinationFolder/$fullPackageName
 
-mkdir -p $configFolder
-cp -r $sourceFolder/setting.json $configFolder
+mkdir -p $destinationConfigFolder
+cp -r $sourceFolder/setting.json $destinationConfigFolder
 
-mkdir -p $dataFolder
-cp -r $sourceFolder/data.json $dataFolder
+mkdir -p $destinationDataFolder
+cp -r $sourceFolder/data.json $destinationDataFolder
 
-mkdir -p $cacheFolder
+mkdir -p $destinationCacheFolder
 
 mkdir -p $appInstallationFolder
 rsync -av --exclude --exclude 'setting.json' --exclude 'data.json' $sourceFolder/ $appInstallationFolder
@@ -74,8 +80,8 @@ Homepage: http://d-p.com.au
 Description: DP Device Proxy Application" \
 > $debianFolder/control
 
-echo "$configFolder/setting.json
-$dataFolder/data.json" \
-> @debianFolder/conffiles
+echo "${configFolder}setting.json
+${dataFolder}data.json" \
+> $debianFolder/conffiles
 
 dpkg-deb --build $destinationFolder/$fullPackageName deb/$fullPackageName.deb
