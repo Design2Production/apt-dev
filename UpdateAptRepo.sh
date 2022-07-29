@@ -3,22 +3,31 @@ set -x #echo on
 echo "Update apt-repo..."
 echo
 
-#mkdir -p apt-repo/pool/main
+repoName="$1"
 
-cp deb/*.deb docs/apt-repo/pool/main/.
+if [ "$repoName" = "stable" ] || [ "$repoName" = "testing" ] ; then
+   echo "Repo Name     : $repoName"
+else
+   echo "Repo Name must be specified: stable | testing"
+   exit 1
+fi
 
-#mkdir -p apt-repo/dists/stable/main/binary-amd64
+mkdir -p docs/apt-repo/pool/main
+
+cp deb/$repoName/*.deb docs/apt-repo/pool/main
 
 cd docs/apt-repo
 
-dpkg-scanpackages --multiversion --arch amd64 pool/ > dists/stable/main/binary-amd64/Packages
+mkdir -p dists/$repoName/main/binary-amd64
 
-cat dists/stable/main/binary-amd64/Packages | gzip -9 > dists/stable/main/binary-amd64/Packages.gz
+dpkg-scanpackages --multiversion --arch amd64 pool/main > dists/$repoName/main/binary-amd64/Packages
 
-apt-ftparchive release dists/stable/ > dists/stable/Release
+cat dists/$repoName/binary-amd64/Packages | gzip -9 > dists/$repoName/main/binary-amd64/Packages.gz
 
-cat dists/stable/Release | gpg --default-key design-to-production -abs > dists/stable/Release.gpg
+apt-ftparchive release dists/$repoName/ > dists/$repoName/Release
 
-cat dists/stable/Release | gpg --default-key design-to-production -abs --clearsign > dists/stable/InRelease
+cat dists/$repoName/Release | gpg --default-key design-to-production -abs > dists/$repoName/Release.gpg
+
+cat dists/$repoName/Release | gpg --default-key design-to-production -abs --clearsign > dists/$repoName/InRelease
 
 cd ../..
