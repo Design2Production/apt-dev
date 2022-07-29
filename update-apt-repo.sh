@@ -12,9 +12,13 @@ else
    exit 1
 fi
 
+mkdir -p docs/apt-repo/pool/$repoName
+
 cp deb/$repoName/*.deb docs/apt-repo/pool/$repoName/.
 
 cd docs/apt-repo
+
+mkdir -p dists/$repoName/main/binary-amd64
 
 dpkg-scanpackages --multiversion --arch amd64 pool/$repoName > dists/$repoName/main/binary-amd64/Packages
 
