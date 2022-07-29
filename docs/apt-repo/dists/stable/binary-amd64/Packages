@@ -1,0 +1,36 @@
+Package: dp-device-proxy
+Version: 1.7.3
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: pool/stable/dp-device-proxy_1.7.3_1_amd64.deb
+Size: 46566922
+MD5sum: 45a180fbbca30af2362d655f6640443c
+SHA1: a32aef0e0319904e789e3739b2abbc34841d3043
+SHA256: cdb90925566225cf66480cbac9c9ab3f006aa054b118e2d623eaa266f1e735d9
+Homepage: http://d-p.com.au
+Description: DP Device Proxy Application
+
+Package: skittles-edge-server
+Version: 0.0.1
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: pool/stable/skittles-edge-server_0.0.1_1_amd64.deb
+Size: 78049054
+MD5sum: ebdc0950b12f3a960e93e81b6508bc06
+SHA1: 3c077242e294a890106fc07337d9b62afb84bdfc
+SHA256: ac40a769617d348d3d91d97168978d2ef8a7b8f43d90f51b2fdb372c9bd747a8
+Homepage: http://d-p.com.au
+Description: Skittles Edge Server Application
+
+Package: skittles-edge-server
+Version: 0.0.2
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: pool/stable/skittles-edge-server_0.0.2_1_amd64.deb
+Size: 78049148
+MD5sum: 031c88099631a25c95231ec8f32ad851
+SHA1: 213aa74ab749e86cf591fed7b82c1835bcc9cf47
+SHA256: 04248626cf86e4062ff626c8d87d67e77093d3d334e3af751e358fe203fc4fbd
+Homepage: http://d-p.com.au
+Description: Skittles Edge Server Application
+
