@@ -12,15 +12,15 @@ else
    exit 1
 fi
 
-mkdir -p docs/apt-repo/pool/$repoName
+mkdir -p docs/apt-repo/pool/main
 
-cp deb/$repoName/*.deb docs/apt-repo/pool/$repoName/.
+cp deb/$repoName/*.deb docs/apt-repo/pool/main
 
 cd docs/apt-repo
 
 mkdir -p dists/$repoName/main/binary-amd64
 
-dpkg-scanpackages --multiversion --arch amd64 pool/$repoName > dists/$repoName/main/binary-amd64/Packages
+dpkg-scanpackages --multiversion --arch amd64 pool/main > dists/$repoName/main/binary-amd64/Packages
 
 cat dists/$repoName/binary-amd64/Packages | gzip -9 > dists/$repoName/main/binary-amd64/Packages.gz
 
