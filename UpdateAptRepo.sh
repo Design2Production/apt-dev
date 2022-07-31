@@ -14,13 +14,13 @@ fi
 
 mkdir -p docs/apt-repo/pool/main
 
-cp deb/$repoName/*.deb docs/apt-repo/pool/main
+cp deb/$repoName/*.deb docs/apt-repo/pool/main/$repoName
 
 cd docs/apt-repo
 
 mkdir -p dists/$repoName/main/binary-amd64
 
-dpkg-scanpackages --multiversion --arch amd64 pool/main > dists/$repoName/main/binary-amd64/Packages
+dpkg-scanpackages --multiversion --arch amd64 pool/main/$repoName > dists/$repoName/main/binary-amd64/Packages
 
 cat dists/$repoName/binary-amd64/Packages | gzip -9 > dists/$repoName/main/binary-amd64/Packages.gz
 
