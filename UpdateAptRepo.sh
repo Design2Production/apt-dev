@@ -24,7 +24,7 @@ dpkg-scanpackages --multiversion --arch amd64 amd64 > Packages
 
 cat Packages | gzip -9 > Packages.gz
 
-apt-ftparchive release amd64 > Release
+apt-ftparchive release . > Release
 
 cat Release | gpg --default-key design-to-production -abs > Release.gpg
 
