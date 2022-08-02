@@ -12,22 +12,22 @@ else
    exit 1
 fi
 
-mkdir -p docs/apt-repo/pool/main
+mkdir -p docs/$repoName
 
-cp deb/$repoName/*.deb docs/apt-repo/pool/main
+cp deb/$repoName/*.deb docs/$repoName/main/binary-amd64
 
-cd docs/apt-repo
+cd docs/$repoName
 
-mkdir -p dists/$repoName/main/binary-amd64
+mkdir -p main/binary-amd64
 
-dpkg-scanpackages --multiversion --arch amd64 pool/main > dists/$repoName/main/binary-amd64/Packages
+dpkg-scanpackages --multiversion --arch amd64 main/binary-amd64 > main/binary-amd64/Packages
 
-cat dists/$repoName/binary-amd64/Packages | gzip -9 > dists/$repoName/main/binary-amd64/Packages.gz
+cat main/binary-amd64/Packages | gzip -9 > main/binary-amd64/Packages.gz
 
-apt-ftparchive release dists/$repoName/ > dists/$repoName/Release
+apt-ftparchive release main/binary-amd64 > Release
 
-cat dists/$repoName/Release | gpg --default-key design-to-production -abs > dists/$repoName/Release.gpg
+cat Release | gpg --default-key design-to-production -abs > Release.gpg
 
-cat dists/$repoName/Release | gpg --default-key design-to-production -abs --clearsign > dists/$repoName/InRelease
+cat Release | gpg --default-key design-to-production -abs --clearsign > InRelease
 
 cd ../..

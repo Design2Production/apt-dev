@@ -2,7 +2,7 @@ Package: dp-device-proxy
 Version: 1.7.3
 Architecture: amd64
 Maintainer: Design to Production <support@d-p.com.au>
-Filename: pool/main/dp-device-proxy_1.7.3_1_amd64.deb
+Filename: main/binary-amd64/dp-device-proxy_1.7.3_1_amd64.deb
 Size: 46566922
 MD5sum: 45a180fbbca30af2362d655f6640443c
 SHA1: a32aef0e0319904e789e3739b2abbc34841d3043
@@ -14,7 +14,7 @@ Package: skittles-edge-server
 Version: 0.0.1
 Architecture: amd64
 Maintainer: Design to Production <support@d-p.com.au>
-Filename: pool/main/skittles-edge-server_0.0.1_1_amd64.deb
+Filename: main/binary-amd64/skittles-edge-server_0.0.1_1_amd64.deb
 Size: 78049054
 MD5sum: ebdc0950b12f3a960e93e81b6508bc06
 SHA1: 3c077242e294a890106fc07337d9b62afb84bdfc
@@ -26,7 +26,7 @@ Package: skittles-edge-server
 Version: 0.0.2
 Architecture: amd64
 Maintainer: Design to Production <support@d-p.com.au>
-Filename: pool/main/skittles-edge-server_0.0.2_1_amd64.deb
+Filename: main/binary-amd64/skittles-edge-server_0.0.2_1_amd64.deb
 Size: 78049148
 MD5sum: 031c88099631a25c95231ec8f32ad851
 SHA1: 213aa74ab749e86cf591fed7b82c1835bcc9cf47
