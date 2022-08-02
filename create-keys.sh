@@ -21,4 +21,4 @@ gpg --no-tty --batch --gen-key ~/Documents/apt-keys/dp-key.batch
 gpg --armor --export-secret-keys design-to-production > ~/Documents/apt-keys/dp-key.private
 gpg --armor --export design-to-production > ~/Documents/apt-keys/dp-key.public
 cat ~/Documents/apt-keys/dp-key.public | gpg --dearmor  > ~/Documents/apt-keys/dp-key.gpg
-cp ~/Documents/apt-keys/dp-key.gpg docs/apt-repo/dp-key.gpg
+cp ~/Documents/apt-keys/dp-key.gpg docs/apt/dp-key.gpg
