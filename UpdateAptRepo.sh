@@ -12,19 +12,19 @@ else
    exit 1
 fi
 
-mkdir -p docs/$repoName
+mkdir -p docs/$repoName/amd64
 
-cp deb/$repoName/*.deb docs/$repoName/main/binary-amd64
+cp deb/$repoName/*.deb docs/$repoName/amd64
 
 cd docs/$repoName
 
-mkdir -p main/binary-amd64
+mkdir -p amd64
 
-dpkg-scanpackages --multiversion --arch amd64 main/binary-amd64 > main/binary-amd64/Packages
+dpkg-scanpackages --multiversion --arch amd64 amd64 > Packages
 
-cat main/binary-amd64/Packages | gzip -9 > main/binary-amd64/Packages.gz
+cat Packages | gzip -9 > Packages.gz
 
-apt-ftparchive release main/binary-amd64 > Release
+apt-ftparchive release amd64 > Release
 
 cat Release | gpg --default-key design-to-production -abs > Release.gpg
 
