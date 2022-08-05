@@ -46,6 +46,18 @@ SHA256: 20614bf46f05fd92a2a156cff0e349693a75da37e0afdcbcf7e6564fcd475f31
 Homepage: http://d-p.com.au
 Description: DP Device Proxy Application
 
+Package: dp-device-proxy
+Version: 1.7.5-3
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: amd64/dp-device-proxy_1.7.5_3_amd64.deb
+Size: 46751042
+MD5sum: 182fdf47712f701c4339edc558dd33e5
+SHA1: cb0844b2cadc36e85dfbe33ce22a03e5d77b25c9
+SHA256: d876a13d5600fed9cda41ed7af9e61b0e710ae11ab07a93a26c520b14bb6bba7
+Homepage: http://d-p.com.au
+Description: DP Device Proxy Application
+
 Package: skittles-edge-server
 Version: 0.0.3
 Architecture: amd64
