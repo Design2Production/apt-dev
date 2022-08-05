@@ -105,7 +105,8 @@ ${dataFolder}data.json" \
 echo 'STATUS="$(systemctl is-active dp-device-proxy.service)"
 if [ "$STATUS" = "active" ]; then
     systemctl stop dp-device-proxy.service
-fi' \
+fi
+exit 0' \
 > $debianFolder/preinst
 chmod 775 $debianFolder/preinst
 
