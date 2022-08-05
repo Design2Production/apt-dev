@@ -1,5 +1,5 @@
 #!/bin/bash shopt -s extglob
-set -x #echo on
+#set -x #echo on
 echo "Package DeviceProxy..."
 echo
 packageName="dp-device-proxy"
@@ -46,13 +46,14 @@ destinationConfigFolder="$destinationFolder/$fullPackageName$configFolder"
 dataFolder="/var/lib/$packageName/"
 destinationDataFolder="$destinationFolder/$fullPackageName$dataFolder"
 
-destinationLogFolder="$destinationFolder/var/log/$packageName"
+logFolder="/var/log/$packageName/"
+destinationLogFolder="$destinationFolder/$fullPackageName$logFolder"
 
 cacheFolder="/var/cache/$packageName/"
 destinationCacheFolder="$destinationFolder/$fullPackageName$cacheFolder"
 
 serviceFolder="/etc/systemd/system/"
-destinationServiceFolder="$destinationFolder/$serviceFolder"
+destinationServiceFolder="$destinationFolder/$fullPackageName$serviceFolder"
 
 appInstallationFolder="$destinationFolder/$fullPackageName/usr/lib/$packageName"
 
@@ -80,7 +81,7 @@ mkdir -p $destinationServiceFolder
 cp -r $sourceFolder/dp-device-proxy.service $destinationServiceFolder
 
 mkdir -p $appInstallationFolder
-rsync -av --exclude --exclude 'setting.json' --exclude 'data.json' --exclude 'dp-device-proxy.service' $sourceFolder/ $appInstallationFolder
+rsync -av --exclude 'setting.json' --exclude 'data.json' --exclude 'dp-device-proxy.service' $sourceFolder/ $appInstallationFolder
 chmod 777 "$appInstallationFolder/DeviceProxy"
 chmod 777 "$appInstallationFolder/avrdude"
 
@@ -103,10 +104,12 @@ ${dataFolder}data.json" \
 
 echo "systemctl stop dp-device-proxy.service" \
 > $debianFolder/preinst
+chmod 775 $debianFolder/preinst
 
 echo "systemctl enable dp-device-proxy.service \
 systemctl start dp-device-proxy.service" \
 > $debianFolder/postinst
+chmod 775 $debianFolder/postinst
 
 
 dpkg-deb --build $destinationFolder/$fullPackageName deb/$fullPackageName.deb
