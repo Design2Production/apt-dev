@@ -61,7 +61,7 @@ debianFolder="$destinationFolder/$fullPackageName/DEBIAN"
 
 echo "Full Package Name : $fullPackageName"
 
-rm -r $destinationFolder/$fullPackageName
+rm -rf $destinationFolder/$fullPackageName
 
 mkdir -p $destinationConfigFolder
 chmod 666 $destinationConfigFolder
@@ -87,7 +87,7 @@ chmod 777 "$appInstallationFolder/avrdude"
 
 mkdir -p $debianFolder
 
-rm deb/$fullPackageName.deb
+rm -f deb/$fullPackageName.deb
 
 echo "Package: $packageName
 Version: $version-$release
@@ -102,11 +102,14 @@ echo "${configFolder}setting.json
 ${dataFolder}data.json" \
 > $debianFolder/conffiles
 
-echo "systemctl stop dp-device-proxy.service" \
+echo 'STATUS="$(systemctl is-active dp-device-proxy.service)"
+if [ "$STATUS" = "active" ]; then
+    systemctl stop dp-device-proxy.service
+fi' \
 > $debianFolder/preinst
 chmod 775 $debianFolder/preinst
 
-echo "systemctl enable dp-device-proxy.service \
+echo "systemctl enable dp-device-proxy.service
 systemctl start dp-device-proxy.service" \
 > $debianFolder/postinst
 chmod 775 $debianFolder/postinst
