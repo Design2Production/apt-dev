@@ -2,12 +2,12 @@
 set -x #echo on
 echo "Package DeviceProxy..."
 echo
-packageName="$1"
-version=$2
-release=$3
+packageName="dp-device-proxy"
+version=$1
+release=$2
 architecture="amd64"
 us="_"
-sourceFolder="$4"
+sourceFolder="$3"
 destinationFolder="CodeForPackaging"
 
 if [ "$packageName" = "" ] ; then
@@ -46,9 +46,16 @@ destinationConfigFolder="$destinationFolder/$fullPackageName$configFolder"
 dataFolder="/var/lib/$packageName/"
 destinationDataFolder="$destinationFolder/$fullPackageName$dataFolder"
 
+destinationLogFolder="$destinationFolder/var/log/$packageName"
+
 cacheFolder="/var/cache/$packageName/"
 destinationCacheFolder="$destinationFolder/$fullPackageName$cacheFolder"
+
+serviceFolder="/etc/systemd/system/"
+destinationServiceFolder="$destinationFolder/$serviceFolder"
+
 appInstallationFolder="$destinationFolder/$fullPackageName/usr/lib/$packageName"
+
 debianFolder="$destinationFolder/$fullPackageName/DEBIAN"
 
 echo "Full Package Name : $fullPackageName"
@@ -56,19 +63,29 @@ echo "Full Package Name : $fullPackageName"
 rm -r $destinationFolder/$fullPackageName
 
 mkdir -p $destinationConfigFolder
+chmod 666 $destinationConfigFolder
 cp -r $sourceFolder/setting.json $destinationConfigFolder
 
 mkdir -p $destinationDataFolder
+chmod 666 $destinationDataFolder
 cp -r $sourceFolder/data.json $destinationDataFolder
 
 mkdir -p $destinationCacheFolder
+chmod 666 $destinationCacheFolder
+
+mkdir -p $destinationLogFolder
+chmod 666 $destinationLogFolder
+
+mkdir -p $destinationServiceFolder
+cp -r $sourceFolder/dp-device-proxy.service $destinationServiceFolder
 
 mkdir -p $appInstallationFolder
-rsync -av --exclude --exclude 'setting.json' --exclude 'data.json' $sourceFolder/ $appInstallationFolder
+rsync -av --exclude --exclude 'setting.json' --exclude 'data.json' --exclude 'dp-device-proxy.service' $sourceFolder/ $appInstallationFolder
 chmod 777 "$appInstallationFolder/DeviceProxy"
-
+chmod 777 "$appInstallationFolder/avrdude"
 
 mkdir -p $debianFolder
+
 rm deb/$fullPackageName.deb
 
 echo "Package: $packageName
@@ -83,5 +100,13 @@ Description: DP Device Proxy Application" \
 echo "${configFolder}setting.json
 ${dataFolder}data.json" \
 > $debianFolder/conffiles
+
+echo "systemctl stop dp-device-proxy.service" \
+> $debianFolder/preinst
+
+echo "systemctl enable dp-device-proxy.service \
+systemctl start dp-device-proxy.service" \
+> $debianFolder/postinst
+
 
 dpkg-deb --build $destinationFolder/$fullPackageName deb/$fullPackageName.deb
