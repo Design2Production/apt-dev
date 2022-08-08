@@ -6,5 +6,5 @@ set -x #echo on
 # We don't want to ever create new keys unless absolutley necessary, as customers that have already installed our apps using the public key would need to update to the new keys
 # We can however run this script to set our default key for signing however often is needed
 
-export GNUPGHOME="$(mktemp -d ~/Documents/apt-keys/pgpkeys-XXXXXX)"
-cat ~/Documents/apt-keys/dp-key.private | gpg --import
+export GNUPGHOME="$(mktemp -d ../apt-keys/pgpkeys-XXXXXX)"
+cat ../apt-keys/dp-key.private | gpg --import
