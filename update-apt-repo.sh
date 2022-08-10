@@ -3,7 +3,15 @@ set -x #echo on
 echo "Update apt-repo..."
 echo
 
-repoName="$1"
+clientName="$1"
+repoName="$2"
+
+if [ "$clientName" = "shopper-media" ] || [ "$clientName" = "internal" ] ; then
+   echo "Client           : $clientName"
+else
+   echo "Client must be specified: shopper-media | internal"
+   exit 1
+fi
 
 if [ "$repoName" = "stable" ] || [ "$repoName" = "testing" ] ; then
    echo "Repo Name     : $repoName"
@@ -12,13 +20,7 @@ else
    exit 1
 fi
 
-mkdir -p docs/$repoName/amd64
-
-cp deb/$repoName/*.deb docs/$repoName/amd64
-
-cd docs/$repoName
-
-mkdir -p amd64
+cd docs/$clientName/$repoName
 
 dpkg-scanpackages --multiversion --arch amd64 amd64 > Packages
 
@@ -30,4 +32,4 @@ cat Release | gpg --default-key design-to-production -abs > Release.gpg
 
 cat Release | gpg --default-key design-to-production -abs --clearsign > InRelease
 
-cd ../..
+cd ../../..

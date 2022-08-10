@@ -14,11 +14,11 @@ Name-Email: support@d-p.com.au
 Expire-Date: 0
 %no-ask-passphrase
 %no-protection
-%commit" > ~/Documents/apt-keys/dp-key.batch
+%commit" > /home/win/dev/apt-keys/dp-key.batch
 
-export GNUPGHOME="$(mktemp -d ~/Documents/apt-keys/pgpkeys-XXXXXX)"
-gpg --no-tty --batch --gen-key ~/Documents/apt-keys/dp-key.batch
-gpg --armor --export-secret-keys design-to-production > ~/Documents/apt-keys/dp-key.private
-gpg --armor --export design-to-production > ~/Documents/apt-keys/dp-key.public
-cat ~/Documents/apt-keys/dp-key.public | gpg --dearmor  > ~/Documents/apt-keys/dp-key.gpg
-cp ~/Documents/apt-keys/dp-key.gpg docs/apt/dp-key.gpg
+export GNUPGHOME="$(mktemp -d /home/win/dev/apt-keys/pgpkeys-XXXXXX)"
+gpg --no-tty --batch --gen-key /home/win/dev/apt-keys/dp-key.batch
+gpg --armor --export-secret-keys design-to-production > /home/win/dev/apt-keys/dp-key.private
+gpg --armor --export design-to-production > /home/win/dev/apt-keys/dp-key.public
+cat /home/win/dev/apt-keys/dp-key.public | gpg --dearmor  > /home/win/dev/apt-keys/dp-key.gpg
+cp /home/win/dev/apt-keys/dp-key.gpg docs/dp-key.gpg

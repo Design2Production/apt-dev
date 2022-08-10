@@ -8,7 +8,9 @@ release=$2
 architecture="amd64"
 us="_"
 sourceFolder="$3"
-destinationFolder="CodeForPackaging"
+packagingFolder="Packaging"
+clientName="$4"
+repoName="$5"
 
 if [ "$packageName" = "" ] ; then
    echo "Package Name must be specified"
@@ -32,60 +34,82 @@ else
 fi
 
 if [ "$sourceFolder" = "" ] ; then
-   echo "Source Folder be specified"
+   echo "Source Folder must be specified"
    exit 1
 else
    echo "Source Folder    : $sourceFolder"
 fi
 
+if [ "$clientName" = "shopper-media" ] || [ "$clientName" = "internal" ] ; then
+   echo "Client           : $clientName"
+else
+   echo "Client must be specified: shopper-media | internal"
+   exit 1
+fi
+
+if [ "$repoName" = "stable" ] || [ "$repoName" = "testing" ] ; then
+   echo "Repo Name     : $repoName"
+else
+   echo "Repo Name must be specified: stable | testing"
+   exit 1
+fi
+
 fullPackageName="$packageName$us$version$us$release$us$architecture"
 
 configFolder="/etc/$packageName/"
-destinationConfigFolder="$destinationFolder/$fullPackageName$configFolder"
+packagingConfigFolder="$packagingFolder/$fullPackageName$configFolder"
 
 dataFolder="/var/lib/$packageName/"
-destinationDataFolder="$destinationFolder/$fullPackageName$dataFolder"
+packagingDataFolder="$packagingFolder/$fullPackageName$dataFolder"
 
 logFolder="/var/log/$packageName/"
-destinationLogFolder="$destinationFolder/$fullPackageName$logFolder"
+packagingLogFolder="$packagingFolder/$fullPackageName$logFolder"
 
 cacheFolder="/var/cache/$packageName/"
-destinationCacheFolder="$destinationFolder/$fullPackageName$cacheFolder"
+packagingCacheFolder="$packagingFolder/$fullPackageName$cacheFolder"
 
 serviceFolder="/etc/systemd/system/"
-destinationServiceFolder="$destinationFolder/$fullPackageName$serviceFolder"
+packagingServiceFolder="$packagingFolder/$fullPackageName$serviceFolder"
 
-appInstallationFolder="$destinationFolder/$fullPackageName/usr/lib/$packageName"
+packagingAppFolder="$packagingFolder/$fullPackageName/usr/lib/$packageName"
 
-debianFolder="$destinationFolder/$fullPackageName/DEBIAN"
+packagingDebianFolder="$packagingFolder/$fullPackageName/DEBIAN"
+
+destinationFolder="docs/$clientName/$repoName/amd64"
 
 echo "Full Package Name : $fullPackageName"
 
-rm -rf $destinationFolder/$fullPackageName
+rm -rf $packagingFolder/$fullPackageName
 
-mkdir -p $destinationConfigFolder
-chmod 666 $destinationConfigFolder
-cp -r $sourceFolder/setting.json $destinationConfigFolder
+mkdir -p $destinationFolder
+chmod -R 666 $destinationFolder
+rm -rf $destinationFolder/$fullPackageName.deb
 
-mkdir -p $destinationDataFolder
-chmod 666 $destinationDataFolder
-cp -r $sourceFolder/data.json $destinationDataFolder
+mkdir -p $packagingConfigFolder
+chmod 666 $packagingConfigFolder
+if [ "$clientName" != "shopper-media" ] ; then
+   cp -r $sourceFolder/setting.json $packagingConfigFolder
+fi
 
-mkdir -p $destinationCacheFolder
-chmod 666 $destinationCacheFolder
+mkdir -p $packagingDataFolder
+chmod 666 $packagingDataFolder
+cp -r $sourceFolder/data.json $packagingDataFolder
 
-mkdir -p $destinationLogFolder
-chmod 666 $destinationLogFolder
+mkdir -p $packagingCacheFolder
+chmod 666 $packagingCacheFolder
 
-mkdir -p $destinationServiceFolder
-cp -r $sourceFolder/dp-device-proxy.service $destinationServiceFolder
+mkdir -p $packagingLogFolder
+chmod 666 $packagingLogFolder
 
-mkdir -p $appInstallationFolder
-rsync -av --exclude 'setting.json' --exclude 'data.json' --exclude 'dp-device-proxy.service' $sourceFolder/ $appInstallationFolder
-chmod 777 "$appInstallationFolder/DeviceProxy"
-chmod 777 "$appInstallationFolder/avrdude"
+mkdir -p $packagingServiceFolder
+cp -r $sourceFolder/dp-device-proxy.service $packagingServiceFolder
 
-mkdir -p $debianFolder
+mkdir -p $packagingAppFolder
+rsync -a --stats --exclude 'setting.json' --exclude 'data.json' --exclude 'dp-device-proxy.service' $sourceFolder/ $packagingAppFolder
+chmod 777 "$packagingAppFolder/DeviceProxy"
+chmod 777 "$packagingAppFolder/avrdude"
+
+mkdir -p $packagingDebianFolder
 
 rm -f deb/$fullPackageName.deb
 
@@ -96,24 +120,28 @@ Depends:
 Architecture: amd64
 Homepage: http://d-p.com.au
 Description: DP Device Proxy Application" \
-> $debianFolder/control
+> $packagingDebianFolder/control
 
-echo "${configFolder}setting.json
+if [ "$clientName" = "shopper-media" ] ; then
+   echo "${dataFolder}data.json" \
+   > $packagingDebianFolder/conffiles
+else
+   echo "${configFolder}setting.json
 ${dataFolder}data.json" \
-> $debianFolder/conffiles
+   > $packagingDebianFolder/conffiles
+fi
 
 echo 'STATUS="$(systemctl is-active dp-device-proxy.service)"
 if [ "$STATUS" = "active" ]; then
     systemctl stop dp-device-proxy.service
 fi
 exit 0' \
-> $debianFolder/preinst
-chmod 775 $debianFolder/preinst
+> $packagingDebianFolder/preinst
+chmod 775 $packagingDebianFolder/preinst
 
 echo "systemctl enable dp-device-proxy.service
 systemctl start dp-device-proxy.service" \
-> $debianFolder/postinst
-chmod 775 $debianFolder/postinst
+> $packagingDebianFolder/postinst
+chmod 775 $packagingDebianFolder/postinst
 
-
-dpkg-deb --build $destinationFolder/$fullPackageName deb/$fullPackageName.deb
+dpkg-deb --build $packagingFolder/$fullPackageName $destinationFolder/$fullPackageName.deb
