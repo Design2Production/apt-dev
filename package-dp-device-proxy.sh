@@ -75,31 +75,31 @@ packagingAppFolder="$packagingFolder/$fullPackageName/usr/lib/$packageName"
 
 packagingDebianFolder="$packagingFolder/$fullPackageName/DEBIAN"
 
-destinationFolder="docs/$clientName/$repoName/amd64"
+destinationFolder="docs/$clientName-$repoName/amd64"
 
 echo "Full Package Name : $fullPackageName"
 
 rm -rf $packagingFolder/$fullPackageName
 
 mkdir -p $destinationFolder
-chmod -R 666 $destinationFolder
+chmod --recursive 777 docs
 rm -rf $destinationFolder/$fullPackageName.deb
 
 mkdir -p $packagingConfigFolder
-chmod 666 $packagingConfigFolder
+chmod 777 $packagingConfigFolder
 if [ "$clientName" != "shopper-media" ] ; then
    cp -r $sourceFolder/setting.json $packagingConfigFolder
 fi
 
 mkdir -p $packagingDataFolder
-chmod 666 $packagingDataFolder
+chmod 777 $packagingDataFolder
 cp -r $sourceFolder/data.json $packagingDataFolder
 
 mkdir -p $packagingCacheFolder
-chmod 666 $packagingCacheFolder
+chmod 777 $packagingCacheFolder
 
 mkdir -p $packagingLogFolder
-chmod 666 $packagingLogFolder
+chmod 777 $packagingLogFolder
 
 mkdir -p $packagingServiceFolder
 cp -r $sourceFolder/dp-device-proxy.service $packagingServiceFolder
