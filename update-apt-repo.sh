@@ -14,7 +14,7 @@ else
 fi
 
 if [ "$repoName" = "stable" ] || [ "$repoName" = "testing" ] ; then
-   echo "Repo Name     : $repoName"
+   echo "Repo Name      : $repoName"
 else
    echo "Repo Name must be specified: stable | testing"
    exit 1
