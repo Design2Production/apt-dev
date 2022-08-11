@@ -20,7 +20,7 @@ else
    exit 1
 fi
 
-cd docs/$clientName-$repoName
+cd docs/$clientName/$repoName
 
 dpkg-scanpackages --multiversion --arch amd64 amd64 > Packages
 

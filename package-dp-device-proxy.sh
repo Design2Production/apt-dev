@@ -75,7 +75,7 @@ packagingAppFolder="$packagingFolder/$fullPackageName/usr/lib/$packageName"
 
 packagingDebianFolder="$packagingFolder/$fullPackageName/DEBIAN"
 
-destinationFolder="docs/$clientName-$repoName/amd64"
+destinationFolder="docs/$clientName/$repoName/amd64"
 
 echo "Full Package Name : $fullPackageName"
 
@@ -110,8 +110,6 @@ chmod 777 "$packagingAppFolder/DeviceProxy"
 chmod 777 "$packagingAppFolder/avrdude"
 
 mkdir -p $packagingDebianFolder
-
-rm -f deb/$fullPackageName.deb
 
 echo "Package: $packageName
 Version: $version-$release

@@ -18,7 +18,9 @@ else
    exit 1
 fi
 
-url="https://design2production.github.io/apt/dp-apt-$clientName-$repoName.list"
+filename="dp-apt-$clientName-$repoName.list"
+url="https://design2production.github.io/apt/$fileName"
 
+rm /etc/apt/sources.list.d/$fileName
 wget -P /etc/apt/sources.list.d -nc $url
 apt-get update
