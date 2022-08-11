@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x #echo on
+#set -x #echo on
 echo "Update apt-repo..."
 echo
 
@@ -7,7 +7,7 @@ clientName="$1"
 repoName="$2"
 
 if [ "$clientName" = "shopper-media" ] || [ "$clientName" = "internal" ] ; then
-   echo "Client           : $clientName"
+   echo "Client         : $clientName"
 else
    echo "Client must be specified: shopper-media | internal"
    exit 1
