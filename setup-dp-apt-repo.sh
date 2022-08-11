@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -x #echo on
+set -x #echo on
 
 clientName="$1"
 repoName="$2"
@@ -18,7 +18,7 @@ else
    exit 1
 fi
 
-filename="dp-apt-$clientName-$repoName.list"
+fileName="dp-apt-$clientName-$repoName.list"
 url="https://design2production.github.io/apt/$fileName"
 
 rm /etc/apt/sources.list.d/$fileName
