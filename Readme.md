@@ -10,3 +10,4 @@ sh ./PackageSkittlesEdgeServer.sh skittles-edge-server 0.0.1 1 /media/sf_Share
 
 ### Required packages
 sudo apt install dpkg-dev
+sudo apt install mono-utils

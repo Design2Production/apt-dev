@@ -3,34 +3,18 @@
 echo "Package DeviceProxy..."
 echo
 packageName="dp-device-proxy"
-version=$1
-release=$2
 architecture="amd64"
 us="_"
-sourceFolder="$3"
+sourceFolder="$1"
 packagingFolder="Packaging"
-clientName="$4"
-repoName="$5"
+clientName="$2"
+repoName="$3"
 
 if [ "$packageName" = "" ] ; then
    echo "Package Name must be specified"
    exit 1
 else
    echo "Package Name     : $packageName"
-fi
-
-if [ "$version" = "" ] ; then
-   echo "Version must be specified as x.y.z"
-   exit 1
-else
-   echo "Version          : $version"
-fi
-
-if [ "$release" = "" ] ; then
-   echo "Release must be specified"
-   exit 1
-else
-   echo "Release          : $release"
 fi
 
 if [ "$sourceFolder" = "" ] ; then
@@ -48,13 +32,25 @@ else
 fi
 
 if [ "$repoName" = "stable" ] || [ "$repoName" = "testing" ] ; then
-   echo "Repo Name     : $repoName"
+   echo "Repo Name        : $repoName"
 else
    echo "Repo Name must be specified: stable | testing"
    exit 1
 fi
 
-fullPackageName="$packageName$us$version$us$release$us$architecture"
+rm -f dp-device-proxy-version.txt
+monodis --assembly $sourceFolder/DeviceProxy.dll > dp-device-proxy-version.txt
+version=$(grep 'Version:' dp-device-proxy-version.txt | awk '{print $2}' | sed 's/\.\([^.]*\)$/-\1/')
+filenameVersion=$(grep 'Version:' dp-device-proxy-version.txt | awk '{print $2}' | sed 's/\.\([^.]*\)$/_\1/')
+
+if [ "$version" = "" ] ; then
+   echo "Version not detected in DeviceProxy.dll"
+   exit 1
+else
+   echo "Version          : $version"
+fi
+
+fullPackageName="$packageName$us$filenameVersion$us$architecture"
 
 configFolder="/etc/$packageName/"
 packagingConfigFolder="$packagingFolder/$fullPackageName$configFolder"
@@ -77,7 +73,7 @@ packagingDebianFolder="$packagingFolder/$fullPackageName/DEBIAN"
 
 destinationFolder="docs/$clientName/$repoName/amd64"
 
-echo "Full Package Name : $fullPackageName"
+echo "Full Package Name: $fullPackageName"
 
 rm -rf $packagingFolder/$fullPackageName
 
@@ -105,14 +101,14 @@ mkdir -p $packagingServiceFolder
 cp -r $sourceFolder/dp-device-proxy.service $packagingServiceFolder
 
 mkdir -p $packagingAppFolder
-rsync -a --stats --exclude 'setting.json' --exclude 'data.json' --exclude 'dp-device-proxy.service' $sourceFolder/ $packagingAppFolder
+rsync -a --info=progress2 --exclude 'setting.json' --exclude 'data.json' --exclude 'dp-device-proxy.service' $sourceFolder/ $packagingAppFolder
 chmod 777 "$packagingAppFolder/DeviceProxy"
 chmod 777 "$packagingAppFolder/avrdude"
 
 mkdir -p $packagingDebianFolder
 
 echo "Package: $packageName
-Version: $version-$release
+Version: $version
 Maintainer: Design to Production <support@d-p.com.au>
 Depends:
 Architecture: amd64
