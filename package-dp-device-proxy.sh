@@ -39,7 +39,7 @@ else
 fi
 
 rm -f dp-device-proxy-version.txt
-monodis --assembly $sourceFolder/DeviceProxy.dll > dp-device-proxy-version.txt
+monodis --assembly $sourceFolder/DeviceProxy.dll >> dp-device-proxy-version.txt
 version=$(grep 'Version:' dp-device-proxy-version.txt | awk '{print $2}' | sed 's/\.\([^.]*\)$/-\1/')
 filenameVersion=$(grep 'Version:' dp-device-proxy-version.txt | awk '{print $2}' | sed 's/\.\([^.]*\)$/_\1/')
 
