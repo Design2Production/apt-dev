@@ -18,7 +18,7 @@ fi
 if [ "$remoteServer" = "Production" ] || [ "$remoteServer" = "Staging" ] ; then
    echo "Remove Server         : $remoteServer"
 else
-   echo "Remove Server must be specified: production | staging"
+   echo "Remove Server must be specified: Production | Staging"
    exit 1
 fi
 
