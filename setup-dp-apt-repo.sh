@@ -1,24 +1,24 @@
 #!/bin/bash
 set -x #echo on
 
-clientName="$1"
-repoName="$2"
+repoName="$1"
+releaseName="$2"
 
-if [ "$clientName" = "shopper-media" ] || [ "$clientName" = "internal" ] ; then
-   echo "Client           : $clientName"
+if [ "$repoName" = "dpems" ] || [ "$repoName" = "skittles" ] ; then
+   echo "Repo        : $repoName"
 else
-   echo "Client must be specified: shopper-media | internal"
+   echo "Repo must be specified: dpems | skittles"
    exit 1
 fi
 
-if [ "$repoName" = "stable" ] || [ "$repoName" = "testing" ] ; then
-   echo "Repo Name     : $repoName"
+if [ "$releaseName" = "stable" ] || [ "$releaseName" = "testing" ] ; then
+   echo "Release Name: $releaseName"
 else
-   echo "Repo Name must be specified: stable | testing"
+   echo "Release Name must be specified: stable | testing"
    exit 1
 fi
 
-fileName="dp-apt-$clientName-$repoName.list"
+fileName="dp-apt-$repoName-$releaseName.list"
 url="https://design2production.github.io/apt/$fileName"
 
 rm /etc/apt/sources.list.d/$fileName

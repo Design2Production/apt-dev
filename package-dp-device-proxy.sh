@@ -7,15 +7,8 @@ architecture="amd64"
 us="_"
 sourceFolder="$1"
 packagingFolder="Packaging"
-clientName="$2"
-repoName="$3"
-
-if [ "$packageName" = "" ] ; then
-   echo "Package Name must be specified"
-   exit 1
-else
-   echo "Package Name     : $packageName"
-fi
+repoName="$2"
+releaseName="$3"
 
 if [ "$sourceFolder" = "" ] ; then
    echo "Source Folder must be specified"
@@ -24,17 +17,17 @@ else
    echo "Source Folder    : $sourceFolder"
 fi
 
-if [ "$clientName" = "shopper-media" ] || [ "$clientName" = "internal" ] ; then
-   echo "Client           : $clientName"
+if [ "$repoName" = "dpems" ] || [ "$repoName" = "skittles" ] ; then
+   echo "Repo             : $repoName"
 else
-   echo "Client must be specified: shopper-media | internal"
+   echo "Repo must be specified: dpems | skittles"
    exit 1
 fi
 
-if [ "$repoName" = "stable" ] || [ "$repoName" = "testing" ] ; then
-   echo "Repo Name        : $repoName"
+if [ "$releaseName" = "stable" ] || [ "$releaseName" = "testing" ] ; then
+   echo "Release Name     : $releaseName"
 else
-   echo "Repo Name must be specified: stable | testing"
+   echo "Release Name must be specified: stable | testing"
    exit 1
 fi
 
@@ -71,7 +64,7 @@ packagingAppFolder="$packagingFolder/$fullPackageName/usr/lib/$packageName"
 
 packagingDebianFolder="$packagingFolder/$fullPackageName/DEBIAN"
 
-destinationFolder="docs/$clientName/$repoName/amd64"
+destinationFolder="docs/$repoName/$releaseName/amd64"
 
 echo "Full Package Name: $fullPackageName"
 
@@ -83,7 +76,7 @@ rm -rf $destinationFolder/$fullPackageName.deb
 
 mkdir -p $packagingConfigFolder
 chmod 777 $packagingConfigFolder
-if [ "$clientName" != "shopper-media" ] ; then
+if [ "$repoName" != "shopper-media" ] ; then
    cp -r $sourceFolder/setting.json $packagingConfigFolder
 fi
 
@@ -116,7 +109,7 @@ Homepage: http://d-p.com.au
 Description: DP Device Proxy Application" \
 > $packagingDebianFolder/control
 
-if [ "$clientName" = "shopper-media" ] ; then
+if [ "$repoName" = "shopper-media" ] ; then
    echo "${dataFolder}data.json" \
    > $packagingDebianFolder/conffiles
 else
