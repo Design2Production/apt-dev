@@ -18,8 +18,8 @@ else
    exit 1
 fi
 
-fileName="$repoName-$releaseName.list"
-url="https://design2production.github.io/apt/$fileName"
+fileName="dev-$repoName-$releaseName.list"
+url="https://design2production.github.io/apt-dev/$fileName"
 
 rm /etc/apt/sources.list.d/$fileName
 wget -P /etc/apt/sources.list.d -nc $url
