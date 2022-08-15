@@ -1,3 +1,7 @@
+# This is the repo for apt development 
+We use this for developing scripts and testing changes and updates.
+Once we are happy with the functions, the changes can be copied over to the apt repo which is used for produciton distribution of our software.
+
 # Package Creation
 
 ## To package Skittles Edge Server in terminal
