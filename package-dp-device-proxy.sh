@@ -31,6 +31,8 @@ else
    exit 1
 fi
 
+rm -r $packagingFolder
+
 rm -f dp-device-proxy-version.txt
 monodis --assembly $sourceFolder/DeviceProxy.dll >> dp-device-proxy-version.txt
 version=$(grep 'Version:' dp-device-proxy-version.txt | awk '{print $2}' | sed 's/\.\([^.]*\)$/-\1/')
@@ -57,9 +59,6 @@ packagingLogFolder="$packagingFolder/$fullPackageName$logFolder"
 cacheFolder="/var/cache/$packageName/"
 packagingCacheFolder="$packagingFolder/$fullPackageName$cacheFolder"
 
-serviceFolder="/etc/systemd/system/"
-packagingServiceFolder="$packagingFolder/$fullPackageName$serviceFolder"
-
 packagingAppFolder="$packagingFolder/$fullPackageName/usr/lib/$packageName"
 
 packagingDebianFolder="$packagingFolder/$fullPackageName/DEBIAN"
@@ -76,9 +75,6 @@ rm -rf $destinationFolder/$fullPackageName.deb
 
 mkdir -p $packagingConfigFolder
 chmod 777 $packagingConfigFolder
-if [ "$repoName" != "shopper-media" ] ; then
-   cp -r $sourceFolder/setting.json $packagingConfigFolder
-fi
 
 mkdir -p $packagingDataFolder
 chmod 777 $packagingDataFolder
@@ -90,11 +86,8 @@ chmod 777 $packagingCacheFolder
 mkdir -p $packagingLogFolder
 chmod 777 $packagingLogFolder
 
-mkdir -p $packagingServiceFolder
-cp -r $sourceFolder/dp-device-proxy.service $packagingServiceFolder
-
 mkdir -p $packagingAppFolder
-rsync -a --info=progress2 --exclude 'setting.json' --exclude 'data.json' --exclude 'dp-device-proxy.service' $sourceFolder/ $packagingAppFolder
+rsync -a --info=progress2 --exclude 'data.json' $sourceFolder/ $packagingAppFolder
 chmod 777 "$packagingAppFolder/DeviceProxy"
 chmod 777 "$packagingAppFolder/avrdude"
 
@@ -109,14 +102,8 @@ Homepage: http://d-p.com.au
 Description: DP Device Proxy Application" \
 > $packagingDebianFolder/control
 
-if [ "$repoName" = "shopper-media" ] ; then
-   echo "${dataFolder}data.json" \
-   > $packagingDebianFolder/conffiles
-else
-   echo "${configFolder}setting.json
-${dataFolder}data.json" \
-   > $packagingDebianFolder/conffiles
-fi
+echo "${dataFolder}data.json" \
+> $packagingDebianFolder/conffiles
 
 echo 'STATUS="$(systemctl is-active dp-device-proxy.service)"
 if [ "$STATUS" = "active" ]; then
@@ -132,3 +119,5 @@ systemctl start dp-device-proxy.service" \
 chmod 775 $packagingDebianFolder/postinst
 
 dpkg-deb --build $packagingFolder/$fullPackageName $destinationFolder/$fullPackageName.deb
+
+rm -r $packagingFolder
