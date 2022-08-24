@@ -6,20 +6,21 @@ echo
 releaseName="$1"
 remoteServer="$2"
 hardwareConfiguration="$3"
+installation="$4"
 repoName="dpems"
 aptRepo="apt-dev"
 serviceFolder="/etc/systemd/system/"
 us="_"
 
 if [ "$repoName" = "dpems" ] ; then
-   echo "Repo        : $repoName"
+   echo "Repo                  : $repoName"
 else
    echo "Repo must be specified: dpems"
    exit 1
 fi
 
 if [ "$releaseName" = "stable" ] || [ "$releaseName" = "testing" ] ; then
-   echo "Release Name: $releaseName"
+   echo "Release Name          : $releaseName"
 else
    echo "Release Name must be specified: stable | testing"
    exit 1
@@ -46,6 +47,25 @@ else
    exit 1
 fi
 
+if [ -z "$installation" ] ; then
+   echo "Old Installation must be specified new | oldInstallationDirectory"
+   exit 1
+else
+   echo "Installation          : $installation"
+   if [ "$installation" != "new" ] ; then
+      settingFile="$installation/conf/setting.json"
+      dataFile="$installation/data/data.json"
+      if [ ! -f $settingFile ] ; then
+         echo "setting.json does not exist in old Installation folder $settingFile"
+         exit 1
+      fi
+      if [ ! -f $dataFile ] ; then
+         echo "data.json does not exist in old Installation folder $dataFile"
+         exit 1
+      fi
+   fi
+fi
+
 echo "Get and install dp key ..."
 
 rm -f /tmp/dp-key.gpg
@@ -68,8 +88,31 @@ url="https://design2production.github.io/$aptRepo/lists/$fileName"
 rm -f /etc/apt/sources.list.d/$fileName
 wget -P /etc/apt/sources.list.d -nc $url
 apt update
-
 echo "... done."
+
+echo "Install dp-device-proxy via apt..."
+apt install dp-device-proxy -y -o Dpkg::Options::="--force-confold"
+echo "... done."
+
+if [ "$installation" = "new" ] ; then
+   #copy settings files from applicaiton and open for editing
+   echo "Copying data for new installation..."
+   cp -fr /usr/lib/dp-device-proxy/setting.json /etc/dp-device-proxy/setting.json
+   echo "Editing setting.json in nano - Save file and exit nano to continue..."
+   nano /etc/dp-device-proxy/setting.json
+   echo "... setting.json saved"
+   echo "Editing data.json in nano - Save file and exit nano to continue..."
+   cp -fr /usr/lib/dp-device-proxy/data.json /var/lib/dp-device-proxy/data.json
+   nano /var/lib/dp-device-proxy/data.json
+   echo "... data.json saved"
+   echo "... done"
+else
+   #copy settings files from old installation
+   echo "Copying data from old installation..."
+   cp -fr $settingFile /etc/dp-device-proxy/setting.json
+   cp -fr $dataFile /var/lib/dp-device-proxy/data.json
+   echo "... done"
+fi
 
 echo "Install dp-device-proxy.service..."
 
@@ -102,10 +145,6 @@ apt autoclean" \
 
 chmod 755 /etc/cron.daily/dp-device-proxy-auto-update
 
-echo "... done."
-
-echo "Install dp-device-proxy via apt..."
-apt install dp-device-proxy -y -o Dpkg::Options::="--force-confold"
 echo "... done."
 
 echo
