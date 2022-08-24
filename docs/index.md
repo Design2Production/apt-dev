@@ -1,48 +1,12 @@
 # Design To Production - Device Proxy installation
 ## Pre Installation
-### New Intallation
-
-Download the setting.json template file
-
-<pre>
-wget https://design2production.github.io/apt-dev/setting.json
-</pre>
-
-Edit the setting.json file being sure to set the ***deviceId***, ***deviceAddress*** or ***port*** and other parameters as required
-<pre>
-sudo nano setting.json
-</pre>
-
-### Move the setting.json file to the /etc/dp-device-proxy folder
-<pre>
-sudo mkdir -p /etc/dp-device-proxy
-sudo mv setting.json /etc/dp-device-proxy
-</pre>
-
-### Update An Existing Installation
+### Updating an Existing Installation
 
 Stop, disable and delete the existing deviceProxy.service
 <pre>
 sudo systemctl stop deviceProxy.service
 sudo systemctl disable deviceProxy.service
 sudo rm /etc/systemd/system/deviceProxy.service
-</pre>
-
-Copy the setting.json file from the ***conf*** folder inside the ***ExistingInstallationFolder***, to a new ***/etc/dp-device-proxy*** folder.
-<pre>
-sudo mkdir -p /etc/dp-device-proxy
-sudo cp <i><b>ExistingInstallationFolder</b></i>/conf/setting.json /etc/dp-device-proxy
-</pre>
-
-Copy the data.json file from the ***data*** folder inside the ***ExistingInstallationFolder***, to a new ***/var/lib/dp-device-proxy*** folder.
-<pre>
-sudo mkdir -p /var/lib/dp-device-proxy
-sudo cp <i><b>ExistingInstallationFolder</b></i>/data/data.json /var/lib/dp-device-proxy
-</pre>
-
-Delete the Existing Installation.
-<pre>
-sudo rm -r <i><b>ExistingInstallationFolder</b></i>
 </pre>
 
 ## Installation
@@ -118,3 +82,10 @@ And the output list should contain
 <pre>
 /etc/cron.daily/dp-device-proxy-auto-update
 </pre>
+
+## Post Installation
+Delete the Old Installation.
+<pre>
+sudo rm -r <i><b>ExistingInstallationFolder</b></i>
+</pre>
+
