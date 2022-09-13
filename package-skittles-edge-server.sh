@@ -1,68 +1,120 @@
 #!/bin/bash shopt -s extglob
-set -x #echo on
-echo "Package SkittlesEdgeServer..."
+#set -x #echo on
+
+applicationName="SkittlesVending.EdgeServer"
+
+echo "Package $applicationName..."
 echo
-packageName="$1"
-version=$2
-release=$3
+
+packageName="dp-skittles-edge-server"
 architecture="amd64"
 us="_"
-sourceFolder="$4"
-destinationFolder="CodeForPackaging"
-
-if [ "$packageName" = "" ] ; then
-   echo "Package Name must be specified"
-   exit 1
-else
-   echo "Package Name     : $packageName"
-fi
-
-if [ "$version" = "" ] ; then
-   echo "Version must be specified as x.y.z"
-   exit 1
-else
-   echo "Version          : $version"
-fi
-
-if [ "$release" = "" ] ; then
-   echo "Release must be specified"
-   exit 1
-else
-   echo "Release          : $release"
-fi
+sourceFolder="$1"
+packagingFolder="Packaging"
+repoName="skittles"
+releaseName="$2"
 
 if [ "$sourceFolder" = "" ] ; then
-   echo "Source Folder be specified"
+   echo "Source Folder must be specified"
    exit 1
 else
    echo "Source Folder    : $sourceFolder"
 fi
 
-fullPackageName="$packageName$us$version$us$release$us$architecture"
-configFolder="$destinationFolder/$fullPackageName/etc/$packageName/"
-appInstallationFolder="$destinationFolder/$fullPackageName/usr/lib/$packageName"
-debianFolder="$destinationFolder/$fullPackageName/DEBIAN"
+if [ "$repoName" = "skittles" ] ; then
+   echo "Repo             : $repoName"
+else
+   echo "Repo must be specified: dpems | skittles"
+   exit 1
+fi
 
-echo "Full Package Name : $fullPackageName"
+if [ "$releaseName" = "stable" ] || [ "$releaseName" = "testing" ] ; then
+   echo "Release Name     : $releaseName"
+else
+   echo "Release Name must be specified: stable | testing"
+   exit 1
+fi
 
-rm -r $destinationFolder/$fullPackageName
-mkdir -p $configFolder
-cp -r $sourceFolder/appsettings*.json $configFolder
-mkdir -p $appInstallationFolder
-rsync -av --exclude 'appsettings*.json' $sourceFolder/ $appInstallationFolder
-chmod 777 "$appInstallationFolder/SkittlesVending.EdgeServer"
+versionFilename="$packageName-version.txt"
 
+rm -r $packagingFolder
 
-mkdir -p $debianFolder
-rm deb/$fullPackageName.deb
+rm -f $versionFilename
+monodis --assembly $sourceFolder/$applicationName.dll >> $versionFilename
+version=$(grep 'Version:' $versionFilename | awk '{print $2}' | sed 's/\.\([^.]*\)$/-\1/')
+filenameVersion=$(grep 'Version:' $versionFilename | awk '{print $2}' | sed 's/\.\([^.]*\)$/_\1/')
+
+if [ "$version" = "" ] ; then
+   echo "Version not detected in $applicationName.dll"
+   exit 1
+else
+   echo "Version          : $version"
+fi
+
+fullPackageName="$packageName$us$filenameVersion$us$architecture"
+
+configFolder="/etc/$packageName/"
+packagingConfigFolder="$packagingFolder/$fullPackageName$configFolder"
+
+dataFolder="/var/lib/$packageName/"
+packagingDataFolder="$packagingFolder/$fullPackageName$dataFolder"
+
+logFolder="/var/log/$packageName/"
+packagingLogFolder="$packagingFolder/$fullPackageName$logFolder"
+
+cacheFolder="/var/cache/$packageName/"
+packagingCacheFolder="$packagingFolder/$fullPackageName$cacheFolder"
+
+packagingAppFolder="$packagingFolder/$fullPackageName/usr/lib/$packageName"
+
+packagingDebianFolder="$packagingFolder/$fullPackageName/DEBIAN"
+
+destinationFolder="docs/$repoName/$releaseName/amd64"
+
+echo "Full Package Name: $fullPackageName"
+
+rm -rf $packagingFolder/$fullPackageName
+
+mkdir -p $destinationFolder
+rm -rf $destinationFolder/$fullPackageName.deb
+
+mkdir -p $packagingConfigFolder
+chmod 777 $packagingConfigFolder
+
+mkdir -p $packagingCacheFolder
+chmod 777 $packagingCacheFolder
+
+mkdir -p $packagingLogFolder
+chmod 777 $packagingLogFolder
+
+mkdir -p $packagingAppFolder
+rsync -a --info=progress2 $sourceFolder/ $packagingAppFolder
+chmod 777 "$packagingAppFolder/$applicationName"
+
+mkdir -p $packagingDebianFolder
 
 echo "Package: $packageName
-Version: $version-$release
+Version: $version
 Maintainer: Design to Production <support@d-p.com.au>
 Depends:
 Architecture: amd64
 Homepage: http://d-p.com.au
-Description: Skittles Edge Server Application" \
-> $debianFolder/control
+Description: DP $applicationName Application" \
+> $packagingDebianFolder/control
 
-dpkg-deb --build $destinationFolder/$fullPackageName deb/$fullPackageName.deb
+echo 'STATUS="$(systemctl is-active '"$packageName"'.service)"
+if [ "$STATUS" = "active" ]; then
+    systemctl stop '"$packageName"'.service
+fi
+exit 0' \
+> $packagingDebianFolder/preinst
+chmod 775 $packagingDebianFolder/preinst
+
+echo "systemctl enable $packageName.service
+systemctl start $packageName.service" \
+> $packagingDebianFolder/postinst
+chmod 775 $packagingDebianFolder/postinst
+
+dpkg-deb --build $packagingFolder/$fullPackageName $destinationFolder/$fullPackageName.deb
+
+rm -r $packagingFolder

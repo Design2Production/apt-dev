@@ -70,7 +70,6 @@ echo "Full Package Name: $fullPackageName"
 rm -rf $packagingFolder/$fullPackageName
 
 mkdir -p $destinationFolder
-chmod --recursive 777 docs
 rm -rf $destinationFolder/$fullPackageName.deb
 
 mkdir -p $packagingConfigFolder
