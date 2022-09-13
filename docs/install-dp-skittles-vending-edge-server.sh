@@ -55,12 +55,12 @@ wget -P /etc/apt/sources.list.d -nc $url
 apt update
 echo "... done."
 
-echo "Install dp-skittles-vending-edge-server via apt..."
+echo "Install $applicationName via apt..."
 apt install $applicationName -y -o Dpkg::Options::="--force-confold"
 echo "... done."
 
 # create the folder for the config files
-mkdir -p /etc/$applicaitonName
+mkdir -p /etc/$applicationName
 
 #create settings files and open for editing
 echo "Creating device-key.json for new installation..."
