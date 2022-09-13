@@ -80,7 +80,7 @@ echo '{
 > /etc/$applicationName/machine-address.json
 
 echo "Editing machine-address.json in nano - Save file and exit nano to continue..."
-nano /var/lib/$applicationName/machine-address.json
+nano /etc/$applicationName/machine-address.json
 echo "... machine-address.json saved"
 echo "... done"
 
