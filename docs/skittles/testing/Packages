@@ -1,12 +1,12 @@
-Package: dp-skittles-edge-server
+Package: dp-skittles-vending-edge-server
 Version: 1.0.0-0
 Architecture: amd64
 Maintainer: Design to Production <support@d-p.com.au>
-Filename: amd64/dp-skittles-edge-server_1.0.0_0_amd64.deb
-Size: 31064948
-MD5sum: e6b8119b7f21f58b5b2f2de109ea2b86
-SHA1: 8076129a99a37a6dc8e76cf0b82bf7f9fe4f3d6b
-SHA256: ac4b8cd7028d056bfb95e5604a44296cbfb890c9eeb654c80184c3262954d402
+Filename: amd64/dp-skittles-vending-edge-server_1.0.0_0_amd64.deb
+Size: 31071084
+MD5sum: 1473dbce26af8adc25cb9c5565233085
+SHA1: 1bd8f9511a485e831921ecdfa9308dd888be508f
+SHA256: ff36c451956c8a25b847e2994030ea026f7830428bd310b7cd147d13dc8b4055
 Homepage: http://d-p.com.au
 Description: DP SkittlesVending.EdgeServer Application
 
