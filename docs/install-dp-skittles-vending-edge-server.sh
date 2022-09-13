@@ -4,7 +4,6 @@ echo "Install dp-skittles-vending-edge-server ..."
 echo
 
 releaseName="$1"
-installation="$2"
 applicationName="dp-skittles-vending-edge-server"
 repoName="skittles"
 aptRepo="apt-dev"
@@ -59,6 +58,9 @@ echo "... done."
 echo "Install dp-skittles-vending-edge-server via apt..."
 apt install $applicationName -y -o Dpkg::Options::="--force-confold"
 echo "... done."
+
+# create the folder for the config files
+mkdir -p /etc/$applicaitonName
 
 #create settings files and open for editing
 echo "Creating device-key.json for new installation..."
