@@ -5,6 +5,7 @@ echo
 
 releaseName="$1"
 applicationName="dp-skittles-vending-edge-server"
+executableName="SkittleVending.EdgeServer"
 repoName="skittles"
 aptRepo="apt-dev"
 serviceFolder="/etc/systemd/system/"
@@ -87,11 +88,11 @@ echo "... done"
 echo "Install $applicaitonName.service..."
 
 echo "[Unit]
-    Description=SkittlesVending.EdgeServer
+    Description=$executableName
 
     [Service]
     WorkingDirectory=/usr/lib/$applicationName
-    ExecStart=/usr/lib/$applicaitonName/DeviceProxy
+    ExecStart=/usr/lib/$applicaitonName/$executableName
     Restart=always
     RestartSec=10   
     SyslogIdentifier=$applicaitonName
