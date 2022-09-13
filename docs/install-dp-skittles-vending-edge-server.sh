@@ -5,7 +5,7 @@ echo
 
 releaseName="$1"
 applicationName="dp-skittles-vending-edge-server"
-executableName="SkittleVending.EdgeServer"
+executableName="SkittlesVending.EdgeServer"
 repoName="skittles"
 aptRepo="apt-dev"
 serviceFolder="/etc/systemd/system/"
