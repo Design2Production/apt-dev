@@ -92,7 +92,7 @@ echo "[Unit]
 
     [Service]
     WorkingDirectory=/usr/lib/$applicationName
-    ExecStart=/usr/lib/$applicaitonName/$executableName
+    ExecStart=/usr/lib/$applicationName/$executableName
     Restart=always
     RestartSec=10   
     SyslogIdentifier=$applicaitonName
