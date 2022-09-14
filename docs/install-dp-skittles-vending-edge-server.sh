@@ -108,9 +108,11 @@ echo "... done."
 echo "Setup $applicationName-auto-update..."
 rm -f /etc/cron.daily/$applicaitonName-auto-update
 echo "#!/bin/bash
+systemctl stop $applicationName.service
 apt update
 apt install $applicaitonName -y -o Dpkg::Options::=\"--force-confold\"
-apt autoclean" \
+apt autoclean
+systemctl start $applicationName.service" \
 > /etc/cron.daily/$applicationName-auto-update
 
 chmod 755 /etc/cron.daily/$applicationName-auto-update

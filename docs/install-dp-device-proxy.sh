@@ -138,9 +138,11 @@ echo "... done."
 echo "Setup dp-device-proxy-auto-update..."
 rm -f /etc/cron.daily/dp-device-proxy-auto-update
 echo "#!/bin/bash
+systemctl stop dp-device-proxy.service
 apt update
 apt install dp-device-proxy -y -o Dpkg::Options::=\"--force-confold\"
-apt autoclean" \
+apt autoclean
+systemctl start dp-device-proxy.service" \
 > /etc/cron.daily/dp-device-proxy-auto-update
 
 chmod 755 /etc/cron.daily/dp-device-proxy-auto-update
