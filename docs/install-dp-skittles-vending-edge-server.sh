@@ -66,6 +66,7 @@ mkdir -p /etc/$applicationName
 #create settings files and open for editing
 echo "Creating device-key.json for new installation..."
 echo '{
+   "deviceId": ""
    "deviceKey": ""
 }' \
 > /etc/$applicationName/device-key.json
@@ -74,15 +75,15 @@ echo "Editing device-key..json in nano - Save file and exit nano to continue..."
 nano /etc/$applicationName/device-key.json
 echo "... device-key.json saved"
 
-echo "Creation machine-address.json for new installation..."
+echo "Creation machine-address-config.json for new installation..."
 echo '{
    "machineAddress": "http://192.168.0.28:8000"
 }' \
-> /etc/$applicationName/machine-address.json
+> /etc/$applicationName/machine-address-config.json
 
 echo "Editing machine-address.json in nano - Save file and exit nano to continue..."
-nano /etc/$applicationName/machine-address.json
-echo "... machine-address.json saved"
+nano /etc/$applicationName/machine-address-config.json
+echo "... machine-address-config.json saved"
 echo "... done"
 
 echo "Install $applicaitonName.service..."

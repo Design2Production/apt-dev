@@ -87,6 +87,7 @@ chmod 777 $packagingLogFolder
 mkdir -p $packagingAppFolder
 rsync -a --info=progress2 $sourceFolder/ $packagingAppFolder
 chmod 777 "$packagingAppFolder/$applicationName"
+find "$packagingAppFolder/Skittles_Data/StreamingAssets/" -type f -iname "*.sh" -exec chmod 777 {} \;
 
 mkdir -p $packagingDebianFolder
 
