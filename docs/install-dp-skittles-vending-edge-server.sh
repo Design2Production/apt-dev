@@ -10,6 +10,7 @@ repoName="skittles"
 aptRepo="apt-dev"
 serviceFolder="/etc/systemd/system/"
 us="_"
+device="$2"
 
 if [ "$repoName" = "skittles" ] ; then
    echo "Repo                  : $repoName"
@@ -29,6 +30,15 @@ if [ "$aptRepo" = "apt" ] || [ "$aptRepo" = "apt-dev" ] ; then
    echo "Apt Repo              : $aptRepo"
 else 
    echo "Apt Repo must be specified: apt | apt-dev"
+   exit 1
+fi
+
+if [ "$device" = "" ] ; then
+   echo "device              : production install"
+elif [ "$device" = "test" ] ; then
+   echo "device              : test install"
+else 
+   echo "device must be specified: test | blank for production install"
    exit 1
 fi
 
@@ -65,21 +75,36 @@ mkdir -p /etc/$applicationName
 
 #create settings files and open for editing
 echo "Creating device-key.json for new installation..."
-echo '{
+if [ "$device" = "test" ] ; then
+   echo '{
+   "deviceId": "SK-TEST-0001"
+   "deviceKey": "zSXxFlDhreSjxsaHq0fVW5E2NqBtnTPlafKu11w7sTf8Giy7+lFtAgJfUbdYqYPykrNC1Ml567C3DOnflJ73y3R6Je+S0u5869B3ustvDFM4Qt336Y5/aNDaUBajzcI/Hyk31inZqQzwB+5+ctW3gUOujB2ggyz41Yey+LwdMF1W22pVT9evs4NDJEvkVzi1EABNRKCp4E3uNKAHt+QeeQ=="
+}' \
+> /etc/$applicationName/device-key.json
+else
+   echo '{
    "deviceId": ""
    "deviceKey": ""
 }' \
 > /etc/$applicationName/device-key.json
+fi
 
 echo "Editing device-key..json in nano - Save file and exit nano to continue..."
 nano /etc/$applicationName/device-key.json
 echo "... device-key.json saved"
 
 echo "Creation machine-address-config.json for new installation..."
-echo '{
+if [ "$device" = "test" ] ; then
+   echo '{
    "machineAddress": "http://192.168.0.28:8000"
 }' \
 > /etc/$applicationName/machine-address-config.json
+else
+   echo '{
+   "machineAddress": ""
+}' \
+> /etc/$applicationName/machine-address-config.json
+fi
 
 echo "Editing machine-address.json in nano - Save file and exit nano to continue..."
 nano /etc/$applicationName/machine-address-config.json
