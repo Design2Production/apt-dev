@@ -66,6 +66,10 @@ mkdir -p /etc/$applicationName
 #create settings files and open for editing
 echo "Creating skittles-config.json for new installation..."
 echo '{
+  "binsToDisable": [ "" ],
+  "diagnosticMode": "true",
+  "binsAutoActivation": "false",
+  "binsMaxHeight": "44"
 }' \
 > /etc/$applicationName/skittles-config.json
 
