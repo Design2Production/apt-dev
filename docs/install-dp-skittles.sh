@@ -64,28 +64,16 @@ echo "... done."
 mkdir -p /etc/$applicationName
 
 #create settings files and open for editing
-echo "Creating device-key.json for new installation..."
+echo "Creating skittles-config.json for new installation..."
 echo '{
-   "deviceKey": ""
 }' \
-> /etc/$applicationName/device-key.json
+> /etc/$applicationName/skittles-config.json
 
-echo "Editing device-key..json in nano - Save file and exit nano to continue..."
-nano /etc/$applicationName/device-key.json
-echo "... device-key.json saved"
+echo "Editing skittles-config.json in nano - Save file and exit nano to continue..."
+nano /etc/$applicationName/skittles-config.json
+echo "... skittles-config.json saved"
 
-echo "Creation machine-address.json for new installation..."
-echo '{
-   "machineAddress": "http://192.168.0.28:8000"
-}' \
-> /etc/$applicationName/machine-address.json
-
-echo "Editing machine-address.json in nano - Save file and exit nano to continue..."
-nano /etc/$applicationName/machine-address.json
-echo "... machine-address.json saved"
-echo "... done"
-
-echo "Install $applicaitonName.service..."
+echo "Install $applicationName.service..."
 
 echo "[Unit]
     Description=$executableName
@@ -95,7 +83,7 @@ echo "[Unit]
     ExecStart=/usr/lib/$applicationName/$executableName
     Restart=always
     RestartSec=10   
-    SyslogIdentifier=$applicaitonName
+    SyslogIdentifier=$applicationName
     
     [Install]
     WantedBy=multi-user.target" \
@@ -106,11 +94,11 @@ systemctl daemon-reload
 echo "... done."
 
 echo "Setup $applicationName-auto-update..."
-rm -f /etc/cron.daily/$applicaitonName-auto-update
+rm -f /etc/cron.daily/$applicationName-auto-update
 echo "#!/bin/bash
 systemctl stop $applicationName.service
 apt update
-apt install $applicaitonName -y -o Dpkg::Options::=\"--force-confold\"
+apt install $applicationName -y -o Dpkg::Options::=\"--force-confold\"
 apt autoclean
 systemctl start $applicationName.service" \
 > /etc/cron.daily/$applicationName-auto-update

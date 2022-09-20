@@ -1,12 +1,12 @@
 #!/bin/bash shopt -s extglob
 #set -x #echo on
 
-applicationName="MdbPaymentProcessor.WebApi"
+executableName="MdbPaymentProcessor.WebApi"
+packageName="dp-mdb-payment-processor"
 
-echo "Package $applicationName..."
+echo "Package $packageName..."
 echo
 
-packageName="dp-mdb-payment-processor"
 architecture="amd64"
 us="_"
 sourceFolder="$1"
@@ -40,12 +40,12 @@ versionFilename="$packageName-version.txt"
 rm -r $packagingFolder
 
 rm -f $versionFilename
-monodis --assembly $sourceFolder/$applicationName.dll >> $versionFilename
+monodis --assembly $sourceFolder/$executableName.dll >> $versionFilename
 version=$(grep 'Version:' $versionFilename | awk '{print $2}' | sed 's/\.\([^.]*\)$/-\1/')
 filenameVersion=$(grep 'Version:' $versionFilename | awk '{print $2}' | sed 's/\.\([^.]*\)$/_\1/')
 
 if [ "$version" = "" ] ; then
-   echo "Version not detected in $applicationName.dll"
+   echo "Version not detected in $executableName.dll"
    exit 1
 else
    echo "Version          : $version"
@@ -89,7 +89,7 @@ chmod 777 $packagingLogFolder
 
 mkdir -p $packagingAppFolder
 rsync -a --info=progress2 $sourceFolder/ $packagingAppFolder
-chmod 777 "$packagingAppFolder/$applicationName"
+chmod 777 "$packagingAppFolder/$executableName"
 
 mkdir -p $packagingDebianFolder
 
@@ -99,7 +99,7 @@ Maintainer: Design to Production <support@d-p.com.au>
 Depends:
 Architecture: amd64
 Homepage: http://d-p.com.au
-Description: DP $applicationName Application" \
+Description: DP $executableName Application" \
 > $packagingDebianFolder/control
 
 echo 'STATUS="$(systemctl is-active '"$packageName"'.service)"

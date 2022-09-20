@@ -63,7 +63,7 @@ echo "... done."
 # create the folder for the config files
 mkdir -p /etc/$applicationName
 
-echo "Install $applicaitonName.service..."
+echo "Install $applicationName.service..."
 
 echo "[Unit]
     Description=$executableName
@@ -73,7 +73,7 @@ echo "[Unit]
     ExecStart=/usr/lib/$applicationName/$executableName
     Restart=always
     RestartSec=10   
-    SyslogIdentifier=$applicaitonName
+    SyslogIdentifier=$applicationName
     
     [Install]
     WantedBy=multi-user.target" \
@@ -84,11 +84,11 @@ systemctl daemon-reload
 echo "... done."
 
 echo "Setup $applicationName-auto-update..."
-rm -f /etc/cron.daily/$applicaitonName-auto-update
+rm -f /etc/cron.daily/$applicationName-auto-update
 echo "#!/bin/bash
 systemctl stop $applicationName.service
 apt update
-apt install $applicaitonName -y -o Dpkg::Options::=\"--force-confold\"
+apt install $applicationName -y -o Dpkg::Options::=\"--force-confold\"
 apt autoclean
 systemctl start $applicationName.service" \
 > /etc/cron.daily/$applicationName-auto-update

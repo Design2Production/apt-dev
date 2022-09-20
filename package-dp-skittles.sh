@@ -1,12 +1,12 @@
 #!/bin/bash shopt -s extglob
 #set -x #echo on
 
-applicationName="Skittles.x86_64"
+executableName="Skittles.x86_64"
+packageName="dp-skittles"
 
-echo "Package $applicationName..."
+echo "Package $packageName..."
 echo
 
-packageName="dp-skittles"
 architecture="amd64"
 us="_"
 sourceFolder="$1"
@@ -86,7 +86,7 @@ chmod 777 $packagingLogFolder
 
 mkdir -p $packagingAppFolder
 rsync -a --info=progress2 $sourceFolder/ $packagingAppFolder
-chmod 777 "$packagingAppFolder/$applicationName"
+chmod 777 "$packagingAppFolder/$executableName"
 find "$packagingAppFolder/Skittles_Data/StreamingAssets/" -type f -iname "*.sh" -exec chmod 777 {} \;
 
 mkdir -p $packagingDebianFolder
@@ -97,7 +97,7 @@ Maintainer: Design to Production <support@d-p.com.au>
 Depends:
 Architecture: amd64
 Homepage: http://d-p.com.au
-Description: DP $applicationName Application" \
+Description: DP $executableName Application" \
 > $packagingDebianFolder/control
 
 echo 'STATUS="$(systemctl is-active '"$packageName"'.service)"

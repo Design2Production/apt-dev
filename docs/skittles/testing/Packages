@@ -10,6 +10,18 @@ SHA256: 5f6e6a2f67d96984243928e45a8383107514f5503a758f1a859ae24717ccb754
 Homepage: http://d-p.com.au
 Description: DP MdbPaymentProcessor.WebApi Application
 
+Package: dp-mdb-payment-processor
+Version: 1.0.0-2
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: amd64/dp-mdb-payment-processor_1.0.0_2_amd64.deb
+Size: 30346972
+MD5sum: 76a1de999fc5bca2545ac8bad5f24b69
+SHA1: 1d964a9b3e3fc9e08d28b6fbe3ce7882648bf5ec
+SHA256: 3272511cb6958dec6f875ff721b60598c18435a58f1e7e81bf111ff13d496d84
+Homepage: http://d-p.com.au
+Description: DP MdbPaymentProcessor.WebApi Application
+
 Package: dp-skittles
 Version: 1.1.3-1
 Architecture: amd64
@@ -27,10 +39,22 @@ Version: 1.1.3-3
 Architecture: amd64
 Maintainer: Design to Production <support@d-p.com.au>
 Filename: amd64/dp-skittles_1.1.3_3_amd64.deb
-Size: 36257232
-MD5sum: 32d6d7a310155d88946813a42e46c873
-SHA1: 9a2116832cda912f9df3aa15c2b74d1144bd99f2
-SHA256: a73c86537727d4e6d97dd4fbebb72c59c383806ceaa42d0d5b641140bc43619b
+Size: 40500824
+MD5sum: a0ff8f249ddf91e880c4fc144dc4d093
+SHA1: 5ebbaf0dc0d66ab639c1a8e1a5cc49547f6c9848
+SHA256: bd33026d11c54ae7e819f8287dd8c7e140a3b61d057cf74032287a7deb878bf3
+Homepage: http://d-p.com.au
+Description: DP Skittles.x86_64 Application
+
+Package: dp-skittles
+Version: 1.1.3-4
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: amd64/dp-skittles_1.1.3_4_amd64.deb
+Size: 40500068
+MD5sum: c46aba62f5a41821472f0403ccde00f7
+SHA1: ebf533a28ed5ac0e0208b64a9428d5aa77a40a4f
+SHA256: 420cba5d0d8d6081c59462a38b31bd13d8aa8fc9883b8edac8b04c871d6be298
 Homepage: http://d-p.com.au
 Description: DP Skittles.x86_64 Application
 
@@ -67,6 +91,18 @@ Size: 31071616
 MD5sum: 3ece40e4214843ab6617f7229bfa8385
 SHA1: 579e6861b6eb736d1f4dee043ced7d0367546c98
 SHA256: eb88658208399e48ad22baa4fc5de776ed48406938c2b5d9b7add9c9332282ea
+Homepage: http://d-p.com.au
+Description: DP SkittlesVending.EdgeServer Application
+
+Package: dp-skittles-vending-edge-server
+Version: 1.0.0-3
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: amd64/dp-skittles-vending-edge-server_1.0.0_3_amd64.deb
+Size: 31082472
+MD5sum: c64b68f1f17c713316af7c0b818d6274
+SHA1: fb27e4334f2f9ecad98080f8cbe5a5e654e595ca
+SHA256: f7460ea602b521f17daa694cb8fbf0a77e71feae86a548987ed78aefc2497df3
 Homepage: http://d-p.com.au
 Description: DP SkittlesVending.EdgeServer Application
 
