@@ -77,7 +77,7 @@ mkdir -p /etc/$applicationName
 echo "Creating device-config.json for new installation..."
 if [ "$device" = "test" ] ; then
    echo '{
-   "deviceId": "SK-TEST-0001",
+   "deviceId": "DP-P000",
    "deviceKey": "zSXxFlDhreSjxsaHq0fVW5E2NqBtnTPlafKu11w7sTf8Giy7+lFtAgJfUbdYqYPykrNC1Ml567C3DOnflJ73y3R6Je+S0u5869B3ustvDFM4Qt336Y5/aNDaUBajzcI/Hyk31inZqQzwB+5+ctW3gUOujB2ggyz41Yey+LwdMF1W22pVT9evs4NDJEvkVzi1EABNRKCp4E3uNKAHt+QeeQ=="
 }' \
 > /etc/$applicationName/device-config.json
