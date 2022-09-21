@@ -2,6 +2,8 @@
 ## Pre Installation
 ### Updating an Existing Installation
 
+[Skittles](https://design2production.github.io/apt-dev/skittles.md)
+
 Stop, disable and delete the existing deviceProxy.service
 <pre>
 sudo systemctl stop deviceProxy.service
