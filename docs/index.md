@@ -2,7 +2,7 @@
 ## Pre Installation
 ### Updating an Existing Installation
 
-[Skittles](https://design2production.github.io/apt-dev/skittles.md)
+[Skittles](https://design2production.github.io/apt-dev/skittles.html)
 
 Stop, disable and delete the existing deviceProxy.service
 <pre>
