@@ -68,14 +68,14 @@ echo "Install $applicationName.service..."
 echo "[Unit]
     Description=$executableName
 
-    [Service]
+[Service]
     WorkingDirectory=/usr/lib/$applicationName
     ExecStart=/usr/lib/$applicationName/$executableName
     Restart=always
     RestartSec=10   
     SyslogIdentifier=$applicationName
     
-    [Install]
+[Install]
     WantedBy=multi-user.target" \
 > $serviceFolder/$applicationName.service
 

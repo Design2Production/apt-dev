@@ -82,14 +82,17 @@ echo "Install $applicationName.service..."
 echo "[Unit]
     Description=$executableName
 
-    [Service]
+[Service]
+    Environment="DISPLAY=:0"
+    Environment="XAUTHORITY="/run/user/1000.mutter-Xwaylandauth.HAQIS1"
     WorkingDirectory=/usr/lib/$applicationName
     ExecStart=/usr/lib/$applicationName/$executableName
+    User=dp
     Restart=always
     RestartSec=10   
     SyslogIdentifier=$applicationName
     
-    [Install]
+[Install]
     WantedBy=multi-user.target" \
 > $serviceFolder/$applicationName.service
 
