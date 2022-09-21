@@ -146,5 +146,12 @@ chmod 755 /etc/cron.daily/$applicationName-auto-update
 
 echo "... done."
 
+echo "start $applicaitonName.service"
+
+systemctl enable $applicaitonName.service
+systemctl start $applicaitonName.service
+
+echo "... done."
+
 echo
 echo "Installation Complete."
