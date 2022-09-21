@@ -119,6 +119,16 @@ On the Target machine, when installing for the first time you need to download t
 
 #### IMPORTANT - You can simplfy this by not including the -O filename ... BUT if you already have a file downloaded, it won't overwrite it, but the newly downloaded file will have .1 added to the end of it and if you then try and run it, you will be using the previous install script
 
+To install each application type the following
+
+> sudo sh ./install-dp-skittles-vending-edge-server.sh testing test  
+> sudo sh ./install-dp-mdb-payment-processor.sh testing  
+> sudo sh ./install-dp-skittles.sh testing  
+
+#### NOTE - if you specify test for the vending installation, it will pre fill the device-config.json file with the default id and key for our skittles development machine
+
+We still need to develop the interface so we can specify a serial number and the script will contact the portal to create a new machine and return the deviceId and deviceKey
+
 ### Update
 
 On the Target machine, update by calling the auto update script
