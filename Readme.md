@@ -93,9 +93,20 @@ sh ./update-apt-repo.sh skittles testing
 
 Once the script has run, the changes must be committed and pushed to the apt-dev repo
 
-I have been using GitKraken (installed on WSL and run from the command line via gitkraken which opens the linux apps gui in windows!), but I'll create a new script to do this on the command line.
+In VS Code, use the SOURCE CONTROL panel to commit and push the changes. Include the new versions in the commit name if possible
 
-#### IMPORTANT - If using GitKraken, it can timeout if pushing many large files (a bug) - so I usually do the commit in Kraken and then just run git push on the command line....
+#### IMPORTANT - Once pushed, it will take several minutes for the changes to be published to the github pages site
+
+To know when it's publioshed, you can open the repo here
+
+https://github.com/Design2Production/apt-dev1
+
+Then you can click on the cross, tick or dot to the left of the commit number The status can then be seen in the popup
+
+You can also click on the Details link, which gives you more information about the progress of the deployment
+
+<img src="github publish status.png"
+     alt="github publish status"/>
 
 ### Install Update
 
