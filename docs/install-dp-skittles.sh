@@ -79,21 +79,21 @@ echo "... skittles-config.json saved"
 
 echo "Install $applicationName.service..."
 
-echo "[Unit]
-    Description=$executableName
+echo '[Unit]
+    Description='$executableName'
 
 [Service]
-    Environment="DISPLAY=:0"
-    Environment="XAUTHORITY="/run/user/1000.mutter-Xwaylandauth.HAQIS1"
-    WorkingDirectory=/usr/lib/$applicationName
-    ExecStart=/usr/lib/$applicationName/$executableName
+    Environment=''"DISPLAY=:0"
+    Environment="XAUTHORITY=/run/user/1000.mutter-Xwaylandauth.HAQIS1"
+    WorkingDirectory=/usr/lib/'$applicationName'
+    ExecStart=/usr/lib/'$applicationName/$executableName'
     User=dp
     Restart=always
     RestartSec=10   
-    SyslogIdentifier=$applicationName
+    SyslogIdentifier='$applicationName'
     
 [Install]
-    WantedBy=multi-user.target" \
+    WantedBy=multi-user.target' \
 > $serviceFolder/$applicationName.service
 
 systemctl daemon-reload
