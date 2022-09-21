@@ -5,6 +5,7 @@ echo
 
 releaseName="$1"
 applicationName="dp-skittles-vending-edge-server"
+configFolderName="dp-skittles"
 executableName="SkittlesVending.EdgeServer"
 repoName="skittles"
 aptRepo="apt-dev"
@@ -71,7 +72,7 @@ apt install $applicationName -y -o Dpkg::Options::="--force-confold"
 echo "... done."
 
 # create the folder for the config files
-mkdir -p /etc/$applicationName
+mkdir -p /etc/$configFolderName
 
 #create settings files and open for editing
 echo "Creating device-config.json for new installation..."
@@ -80,17 +81,17 @@ if [ "$device" = "test" ] ; then
    "deviceId": "DP-P000",
    "deviceKey": "zSXxFlDhreSjxsaHq0fVW5E2NqBtnTPlafKu11w7sTf8Giy7+lFtAgJfUbdYqYPykrNC1Ml567C3DOnflJ73y3R6Je+S0u5869B3ustvDFM4Qt336Y5/aNDaUBajzcI/Hyk31inZqQzwB+5+ctW3gUOujB2ggyz41Yey+LwdMF1W22pVT9evs4NDJEvkVzi1EABNRKCp4E3uNKAHt+QeeQ=="
 }' \
-> /etc/$applicationName/device-config.json
+> /etc/$configFolderName/device-config.json
 else
    echo '{
    "deviceId": "",
    "deviceKey": ""
 }' \
-> /etc/$applicationName/device-config.json
+> /etc/$configFolderName/device-config.json
 fi
 
 echo "Editing device-config..json in nano - Save file and exit nano to continue..."
-nano /etc/$applicationName/device-config.json
+nano /etc/$configFolderName/device-config.json
 echo "... device-config.json saved"
 
 echo "Creation machine-address-config.json for new installation..."
@@ -98,16 +99,16 @@ if [ "$device" = "test" ] ; then
    echo '{
    "machineAddress": "http://192.168.0.28:8000"
 }' \
-> /etc/$applicationName/machine-address-config.json
+> /etc/$configFolderName/machine-address-config.json
 else
    echo '{
    "machineAddress": ""
 }' \
-> /etc/$applicationName/machine-address-config.json
+> /etc/$configFolderName/machine-address-config.json
 fi
 
 echo "Editing machine-address.json in nano - Save file and exit nano to continue..."
-nano /etc/$applicationName/machine-address-config.json
+nano /etc/$configFolderName/machine-address-config.json
 echo "... machine-address-config.json saved"
 echo "... done"
 
