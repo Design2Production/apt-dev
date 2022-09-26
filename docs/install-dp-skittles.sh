@@ -81,6 +81,7 @@ echo "Install $applicationName.service..."
 
 echo '[Unit]
     Description='$executableName'
+    After=milti-user.target
 
 [Service]
     Environment=''"DISPLAY=:0"
