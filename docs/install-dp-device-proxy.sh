@@ -102,7 +102,6 @@ if [ "$installation" = "new" ] ; then
    nano /etc/dp-device-proxy/setting.json
    echo "... setting.json saved"
    echo "Editing data.json in nano - Save file and exit nano to continue..."
-   cp -fr /usr/lib/dp-device-proxy/data.json /var/lib/dp-device-proxy/data.json
    nano /var/lib/dp-device-proxy/data.json
    echo "... data.json saved"
    echo "... done"
