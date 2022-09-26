@@ -149,5 +149,10 @@ chmod 755 /etc/cron.daily/dp-device-proxy-auto-update
 
 echo "... done."
 
+echo "start dp-device-proxy.service"
+
+systemctl enable dp-device-proxy.service
+systemctl start dp-device-proxy.service
+
 echo
 echo "Installation Complete."
