@@ -1,7 +1,7 @@
 Assembly Table
 Name:          MdbPaymentProcessor.WebApi
 Hash Algoritm: 0x00008004
-Version:       1.0.0.2
+Version:       1.0.0.3
 Flags:         0x00000000
 PublicKey:     BlobPtr (0x00000000)
 	Zero sized public key
