@@ -83,7 +83,7 @@ echo '[Unit]
     Description='$executableName'
     After=multi-user.target
     After=dp-mdb-payment-processor
-    Adter=dp-skittles-vending-edge-server
+    After=dp-skittles-vending-edge-server
 
 [Service]
     Environment=''"DISPLAY=:0"
