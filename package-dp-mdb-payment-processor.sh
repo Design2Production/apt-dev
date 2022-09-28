@@ -117,4 +117,4 @@ chmod 775 $packagingDebianFolder/postinst
 
 dpkg-deb --build $packagingFolder/$fullPackageName $destinationFolder/$fullPackageName.deb
 
-#rm -r $packagingFolder
+rm -r $packagingFolder
