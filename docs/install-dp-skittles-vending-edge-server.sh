@@ -116,6 +116,7 @@ echo "Install $applicationName.service..."
 
 echo "[Unit]
     Description=$executableName
+    Before=dp-skittles.service
 
 [Service]
     WorkingDirectory=/usr/lib/$applicationName
