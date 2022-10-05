@@ -82,8 +82,8 @@ echo "Install $applicationName.service..."
 echo '[Unit]
     Description='$executableName'
     After=multi-user.target
-    After=dp-mdb-payment-processor
-    After=dp-skittles-vending-edge-server
+    After=dp-mdb-payment-processor.service
+    After=dp-skittles-vending-edge-server.service
 
 [Service]
     Environment=''"DISPLAY=:0"
