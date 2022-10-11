@@ -58,6 +58,18 @@ SHA256: 2bc4af7f4e5942c66d57d2e2ec712a7c563717b2fd33e2cc3761a25062530643
 Homepage: http://d-p.com.au
 Description: DP MdbPaymentProcessor.WebApi Application
 
+Package: dp-mdb-payment-processor
+Version: 1.0.0-6
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: amd64/dp-mdb-payment-processor_1.0.0_6_amd64.deb
+Size: 30355924
+MD5sum: ddeb6ff88f81ed2a682d6ac2cd5aa91b
+SHA1: 5f3b28aef311e812a9fa98ed06d98eae83b6a5fb
+SHA256: 353bc987314992da47e983e20722104b0fb40857a5cce5c94b456b2442874d87
+Homepage: http://d-p.com.au
+Description: DP MdbPaymentProcessor.WebApi Application
+
 Package: dp-skittles
 Version: 1.1.3-1
 Architecture: amd64
