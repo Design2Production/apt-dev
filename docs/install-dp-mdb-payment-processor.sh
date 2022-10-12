@@ -63,6 +63,11 @@ echo "... done."
 # create the folder for the config files
 mkdir -p /etc/$applicationName
 
+# add a setting.json file
+echo '{
+   "serialPort": "/dev/ttyS0' \
+> /etc/$applicationName/setting.json
+
 echo "Install $applicationName.service..."
 
 echo "[Unit]
