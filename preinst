@@ -1,0 +1,88 @@
+#!/bin/bash
+exec 3>&1 4>&2
+trap 'exec 2>&4 1>&3' 0 1 2 3
+exec 1>/var/log/dp-device-proxy/DeviceProxy-update-log.txt 2>&1
+# Everything below will go to the output file:
+
+# disable the watchdog - both network and serial
+# the proxy will reenable it once it runs
+watchDogDisabled=false
+
+deviceId=$(grep -Po '"'"deviceId"'"\s*:\s*"\K([^"]*)' /etc/dp-device-proxy/setting.json)
+deviceAddress=$(grep -Po '"'"deviceAddress"'"\s*:\s*"\K([^"]*)' /etc/dp-device-proxy/setting.json)
+if [ $deviceId ]
+then
+    logFilename="DeviceProxy-$deviceId-UpdateLog.txt"
+else
+    logFilename='DeviceProxy-NoDeviceIdFound-UpdateLog.txt'
+fi
+
+echo $logFilename
+
+for serialPort in /dev/ttyUSB* 
+do
+  echo "$serialPort"
+  chmod 777 $serialPort
+  stty -F $serialPort 9600
+  stty -F $serialPort cooked -echo
+  exec 99<>$serialPort
+  watchDogOffResponse="!:e0"
+  response=""
+  count=5
+
+  while [ "$response" != "$watchDogOffResponse" ]; do
+    printf "e0" >&99
+    read -t 2 response <&99
+    echo "$count:$response"
+    let count=count-1
+    if [ $count -lt 0 ]
+    then
+      break
+    fi
+  done
+
+  exec 99>&-
+  echo "port done"
+  if [ $count -gt 0 ]
+  then
+    echo "watchdog disabled via serial"
+    watchDogDisabled=true
+    break
+  fi
+done
+echo "all ports done"
+
+generate_post_data()
+{
+  cat <<EOF
+{
+  "status": "false"
+}
+EOF
+}
+
+if [ "$watchDogDisabled" = false ]
+then
+  postCommand="$deviceAddress/setWatchDog"
+  echo $postCommand
+  statusCode=$(curl -i \
+  -H "Accept: application/json" \
+  -H "Content-Type:application/json" \
+  -X POST --data "$(generate_post_data)" "$postCommand" --write-out %{http_code} --silent --output /dev/null)
+  if [[ "$status_code" -ne 200 ]]
+  then
+    watchDogDisabled=true
+    echo "watchdog disabled via network"
+  fi
+fi
+
+if [ "$watchDogDisabled" = false ]
+then
+    echo "watchdog was not disabled"
+fi
+
+echo "stop dp-device-proxy.service if active"
+STATUS="$(systemctl is-active dp-device-proxy.service)"
+if [ "$STATUS" = "active" ]; then
+    systemctl stop dp-device-proxy.service
+fi

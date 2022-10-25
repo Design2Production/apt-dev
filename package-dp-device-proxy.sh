@@ -7,8 +7,8 @@ architecture="amd64"
 us="_"
 sourceFolder="$1"
 packagingFolder="Packaging"
-repoName="$2"
-releaseName="$3"
+releaseName="$2"
+repoName="dpems"
 
 if [ "$sourceFolder" = "" ] ; then
    echo "Source Folder must be specified"
@@ -104,12 +104,7 @@ Description: DP Device Proxy Application" \
 echo "${dataFolder}data.json" \
 > $packagingDebianFolder/conffiles
 
-echo 'STATUS="$(systemctl is-active dp-device-proxy.service)"
-if [ "$STATUS" = "active" ]; then
-    systemctl stop dp-device-proxy.service
-fi
-exit 0' \
-> $packagingDebianFolder/preinst
+cp preinst $packagingDebianFolder/preinst
 chmod 775 $packagingDebianFolder/preinst
 
 echo "systemctl enable dp-device-proxy.service
@@ -119,4 +114,4 @@ chmod 775 $packagingDebianFolder/postinst
 
 dpkg-deb --build $packagingFolder/$fullPackageName $destinationFolder/$fullPackageName.deb
 
-rm -r $packagingFolder
+#rm -r $packagingFolder
