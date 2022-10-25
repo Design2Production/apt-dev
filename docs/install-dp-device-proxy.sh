@@ -7,6 +7,7 @@ releaseName="$1"
 remoteServer="$2"
 hardwareConfiguration="$3"
 installation="$4"
+newDeviceId="$5"
 repoName="dpems"
 aptRepo="apt-dev"
 serviceFolder="/etc/systemd/system/"
@@ -63,6 +64,10 @@ else
          echo "data.json does not exist in old Installation folder $dataFile"
          exit 1
       fi
+   else
+   if [ -z "$newDeviceId" ] ; then
+      echo "newDeviceId must be specified"
+      exit 1
    fi
 fi
 
@@ -95,23 +100,39 @@ apt install dp-device-proxy -y -o Dpkg::Options::="--force-confold"
 echo "... done."
 
 if [ "$installation" = "new" ] ; then
-   #copy settings files from applicaiton and open for editing
-   echo "Copying data for new installation..."
-   cp -fr /usr/lib/dp-device-proxy/setting.json /etc/dp-device-proxy/setting.json
-   echo "Editing setting.json in nano - Save file and exit nano to continue..."
-   nano /etc/dp-device-proxy/setting.json
-   echo "... setting.json saved"
-   echo "Editing data.json in nano - Save file and exit nano to continue..."
-   nano /var/lib/dp-device-proxy/data.json
-   echo "... data.json saved"
-   echo "... done"
+   port="/dev/ttyUSB0"
+   daughterBoardPort="/dev/ttyUSB1"
+   deviceAddress="192.168.64.3"
+   deviceId=$newDeviceId
+   lcdTurnOnSchedule=""
+   lcdTurnOffSchedule=""
+   deviceInfoPollerScheduler="* * * * *"
+   enableRemoteCommand="true"
 else
-   #copy settings files from old installation
-   echo "Copying data from old installation..."
-   cp -fr $settingFile /etc/dp-device-proxy/setting.json
+   #copy settings from old installation
+   port=$(grep -Po '"'"port"'"\s*:\s*"\K([^"]*)' $settingFile)
+   daughterBoardPort=$(grep -Po '"'"daughterBoardPort"'"\s*:\s*"\K([^"]*)' $settingFile)
+   deviceAddress=$(grep -Po '"'"deviceAddress"'"\s*:\s*"\K([^"]*)' $settingFile)
+   deviceId=$(grep -Po '"'"deviceId"'"\s*:\s*"\K([^"]*)' $settingFile)
+   lcdTurnOnSchedule=$(grep -Po '"'"LcdTurnOnSchedule"'"\s*:\s*"\K([^"]*)' $settingFile)
+   lcdTurnOffSchedule=$(grep -Po '"'"LcdTurnOffSchedule"'"\s*:\s*"\K([^"]*)' $settingFile)
+   deviceInfoPollerScheduler=$(grep -Po '"'"DeviceInfoPollerScheduler"'"\s*:\s*"\K([^"]*)' $settingFile)
+   enableRemoteCommand=$(grep -Po '"'"enableRemoteCommand"'"\s*:\s*"\K([^"]*)' $settingFile)
    cp -fr $dataFile /var/lib/dp-device-proxy/data.json
-   echo "... done"
 fi
+echo "write settings.json"
+echo '{
+   "port": "'$port'",
+   "daughterBoardPort": "'$daughterBoardPort'",
+   "deviceAddress": "'$deviceAddress'",
+   "deviceId": "'$deviceId'",
+   "LcdTurnOnSchedule": "'$lcdTurnOnSchedule'",
+   "LcdTurnOffSchedule": "'$lcdTurnOffSchedule'",
+   "DeviceInfoPollerScheduler": "'$deviceInfoPollerScheduler'",
+   "enableRemoteCommand": "'$enableRemoteCommand'",
+   "secondPcIpAddress": "",
+}' \
+> /etc/dp-device-proxy/setting.json
 
 echo "Install dp-device-proxy.service..."
 
