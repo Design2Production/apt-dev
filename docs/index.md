@@ -2,8 +2,6 @@
 ## Pre Installation
 ### Updating an Existing Installation
 
-[Skittles](https://design2production.github.io/apt-dev/skittles.html)
-
 Stop, disable and delete the existing deviceProxy.service
 <pre>
 sudo systemctl stop deviceProxy.service
@@ -15,7 +13,7 @@ sudo rm /etc/systemd/system/deviceProxy.service
 
 To install the D2P device proxy repo on your PC you need to get the following file from the apt-dev repo
 <pre>
-wget https://design2production.github.io/apt-dev/install-dp-device-proxy.sh
+sudo wget https://design2production.github.io/apt-dev/install-dp-device-proxy.sh
 </pre>
 
 If you get an error about wget not being able to verify the github.io certificates, ensure the certificates are installed and being used for wget

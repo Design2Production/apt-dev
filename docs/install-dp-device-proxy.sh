@@ -65,9 +65,10 @@ else
          exit 1
       fi
    else
-   if [ -z "$newDeviceId" ] ; then
-      echo "newDeviceId must be specified"
-      exit 1
+      if [ -z "$newDeviceId" ] ; then
+         echo "newDeviceId must be specified"
+         exit 1
+      fi
    fi
 fi
 
@@ -130,7 +131,7 @@ echo '{
    "LcdTurnOffSchedule": "'$lcdTurnOffSchedule'",
    "DeviceInfoPollerScheduler": "'$deviceInfoPollerScheduler'",
    "enableRemoteCommand": "'$enableRemoteCommand'",
-   "secondPcIpAddress": "",
+   "secondPcIpAddress": ""
 }' \
 > /etc/dp-device-proxy/setting.json
 
