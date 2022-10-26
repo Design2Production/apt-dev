@@ -107,36 +107,36 @@ apt install dp-device-proxy -y -o Dpkg::Options::="--force-confold"
 echo "... done."
 
 if [ "$installation" = "new" ] ; then
-   port="/dev/ttyUSB0"
-   daughterBoardPort="/dev/ttyUSB1"
-   deviceAddress="192.168.64.3"
-   deviceId=$newDeviceId
-   lcdTurnOnSchedule=""
-   lcdTurnOffSchedule=""
-   deviceInfoPollerScheduler="* * * * *"
-   enableRemoteCommand="true"
+   port='/dev/ttyUSB0'
+   daughterBoardPort='/dev/ttyUSB1'
+   deviceAddress='192.168.64.3'
+   deviceId="$newDeviceId"
+   lcdTurnOnSchedule=''
+   lcdTurnOffSchedule=''
+   deviceInfoPollerScheduler='* * * * *'
+   enableRemoteCommand='true'
 else
    #copy settings from old installation
-   port=$(grep -Po '"'"port"'"\s*:\s*"\K([^"]*)' $settingFile)
-   daughterBoardPort=$(grep -Po '"'"daughterBoardPort"'"\s*:\s*"\K([^"]*)' $settingFile)
-   deviceAddress=$(grep -Po '"'"deviceAddress"'"\s*:\s*"\K([^"]*)' $settingFile)
-   deviceId=$(grep -Po '"'"deviceId"'"\s*:\s*"\K([^"]*)' $settingFile)
-   lcdTurnOnSchedule=$(grep -Po '"'"LcdTurnOnSchedule"'"\s*:\s*"\K([^"]*)' $settingFile)
-   lcdTurnOffSchedule=$(grep -Po '"'"LcdTurnOffSchedule"'"\s*:\s*"\K([^"]*)' $settingFile)
-   deviceInfoPollerScheduler=$(grep -Po '"'"DeviceInfoPollerScheduler"'"\s*:\s*"\K([^"]*)' $settingFile)
-   enableRemoteCommand=$(grep -Po '"'"enableRemoteCommand"'"\s*:\s*"\K([^"]*)' $settingFile)
+   port="$(grep -Po '"'"port"'"\s*:\s*"\K([^"]*)' $settingFile)"
+   daughterBoardPort="$(grep -Po '"'"daughterBoardPort"'"\s*:\s*"\K([^"]*)' $settingFile)"
+   deviceAddress="$(grep -Po '"'"deviceAddress"'"\s*:\s*"\K([^"]*)' $settingFile)"
+   deviceId="$(grep -Po '"'"deviceId"'"\s*:\s*"\K([^"]*)' $settingFile)"
+   lcdTurnOnSchedule="$(grep -Po '"'"LcdTurnOnSchedule"'"\s*:\s*"\K([^"]*)' $settingFile)"
+   lcdTurnOffSchedule="$(grep -Po '"'"LcdTurnOffSchedule"'"\s*:\s*"\K([^"]*)' $settingFile)"
+   deviceInfoPollerScheduler="$(grep -Po '"'"DeviceInfoPollerScheduler"'"\s*:\s*"\K([^"]*)' $settingFile)"
+   enableRemoteCommand="$(grep -Po '"'"enableRemoteCommand"'"\s*:\s*"\K([^"]*)' $settingFile)"
    cp -fr $dataFile /var/lib/dp-device-proxy/data.json
 fi
 echo "write settings.json"
 echo '{
-   "port": "'$port'",
-   "daughterBoardPort": "'$daughterBoardPort'",
-   "deviceAddress": "'$deviceAddress'",
-   "deviceId": "'$deviceId'",
-   "LcdTurnOnSchedule": "'$lcdTurnOnSchedule'",
-   "LcdTurnOffSchedule": "'$lcdTurnOffSchedule'",
-   "DeviceInfoPollerScheduler": "'$deviceInfoPollerScheduler'",
-   "enableRemoteCommand": "'$enableRemoteCommand'",
+   "port": "'"$port"'",
+   "daughterBoardPort": "'"$daughterBoardPort"'",
+   "deviceAddress": "'"$deviceAddress"'",
+   "deviceId": "'"$deviceId"'",
+   "LcdTurnOnSchedule": "'"$lcdTurnOnSchedule"'",
+   "LcdTurnOffSchedule": "'"$lcdTurnOffSchedule"'",
+   "DeviceInfoPollerScheduler": "'"$deviceInfoPollerScheduler"'",
+   "enableRemoteCommand": "'"$enableRemoteCommand"'",
    "secondPcIpAddress": ""
 }' \
 > /etc/dp-device-proxy/setting.json
