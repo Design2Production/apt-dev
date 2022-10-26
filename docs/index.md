@@ -2,7 +2,7 @@
 ## Pre Installation
 ### Updating an Existing Installation
 
-Stop, disable and delete the existing deviceProxy.service
+Stop, disable and delete the depricated deviceProxy.service
 <pre>
 sudo systemctl stop deviceProxy.service
 sudo systemctl disable deviceProxy.service
@@ -45,6 +45,9 @@ Hardware Configuration:
 - DPEMS-V2
 
 Use the arguments based on the device you are installing the proxy on.
+
+Shopper Indoor Units are DPEMS-V1_DBV2
+Shopper Outdoor Units are DPEMS-V2
 
 For new feature development as well as pre-production testing
 
