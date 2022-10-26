@@ -23,6 +23,29 @@ printf "\nca_directory=/etc/ssl/certs" | sudo tee -a /etc/wgetrc
 </pre>
 
 Next execute the installation script
+
+Shopper Indoor testing
+<pre>
+sudo sh ./install-dp-device-proxy.sh testing Staging DPEMS-V1_DBV2
+</pre>
+
+Shopper Outdoor testing
+<pre>
+sudo sh ./install-dp-device-proxy.sh testing Staging DPEMS-V2
+</pre>
+
+Shopper Indoor producton
+<pre>
+sudo sh ./install-dp-device-proxy.sh stable Production DPEMS-V1_DBV2
+</pre>
+
+Shopper Outdoor production
+<pre>
+sudo sh ./install-dp-device-proxy.sh stable Production DPEMS-V2
+</pre>
+
+Allowed parameters.
+
 <pre>
 sudo sh ./install-dp-device-proxy.sh stable|testing Production|Staging DPEMS-V1|DPEMS-V1_DBV2|DPEMS-V1_DBV3|DPEMS-V1_FANEXT|DPEMS-V2
 </pre>
@@ -46,9 +69,9 @@ Hardware Configuration:
 
 Use the arguments based on the device you are installing the proxy on.
 
-Shopper Indoor Units are DPEMS-V1_DBV2
+***Shopper Indoor Units are DPEMS-V1_DBV2***
 
-Shopper Outdoor Units are DPEMS-V2
+***Shopper Outdoor Units are DPEMS-V2***
 
 For new feature development as well as pre-production testing
 
