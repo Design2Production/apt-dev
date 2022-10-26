@@ -104,7 +104,7 @@ echo $serverCommand
 statusCode=$(curl -i \
 -H "Accept: application/json" \
 -H "Content-Type:application/json" \
--X POST --data "$(generate_update_start_post_data)" "$serverCommand" --write-out %{http_code} --trace-ascii - ) #--silent --output /dev/null ) 
+-X POST --data "$(generate_update_start_post_data)" "$serverCommand" --write-out %{http_code} --silent --output /dev/null ) 
 
 echo "ping update-started statusCode: $statusCode"
 
