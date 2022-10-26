@@ -47,6 +47,7 @@ Hardware Configuration:
 Use the arguments based on the device you are installing the proxy on.
 
 Shopper Indoor Units are DPEMS-V1_DBV2
+
 Shopper Outdoor Units are DPEMS-V2
 
 For new feature development as well as pre-production testing
