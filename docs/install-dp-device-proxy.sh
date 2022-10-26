@@ -73,8 +73,8 @@ else
 fi
 
 # write out environment so the update routine can read it
-'{
-   `"server`": `"Linux$remoteServer`"
+echo '{
+   "server": "Linux'"$remoteServer"'"
 }' \
 > /var/lib/dp-device-proxy/server.json
 
