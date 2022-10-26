@@ -72,6 +72,12 @@ else
    fi
 fi
 
+# write out environment so the update routine can read it
+"{
+   `"server`": `"Linux$remoteServer`"
+}" \
+> /var/lib/dp-device-proxy/server.json
+
 echo "Get and install dp key ..."
 
 rm -f /tmp/dp-key.gpg

@@ -1,0 +1,49 @@
+#!/bin/bash
+#set -x #echo on
+exec 3>&1 4>&2
+trap 'exec 2>&4 1>&3' 0 1 2 3
+exec 1>/var/log/dp-device-proxy/DeviceProxy-postinst-log.txt 2>&1
+# Everything below will go to the output file:
+
+echo "start"
+deviceId="$(grep -Po '"'"deviceId"'"\s*:\s*"\K([^"]*)' /etc/dp-device-proxy/setting.json)"
+echo $deviceId
+server=$(grep -Po '"'"server"'"\s*:\s*"\K([^"]*)' /var/lib/dp-device-proxy/server.json)
+echo $server
+rm -f /var/lib/dp-device-proxy/dp-device-proxy-version.txt
+monodis --assembly /usr/lib/dp-device-proxy/DeviceProxy.dll >> /var/lib/dp-device-proxy/dp-device-proxy-version.txt
+version=$(grep 'Version:' /var/lib/dp-device-proxy/dp-device-proxy-version.txt | awk '{print $2}' | sed 's/\.\([^.]*\)$/-\1/')
+echo "Version          : $version"
+
+endPoint='/proxy-status.json'
+if [ "$server" = "LinuxStaging" ] ; then
+  serverCommand="https://d2p-ems-staging.herokuapp.com$endPoint"
+else
+  serverCommand="https://www.dp-ems.com$endPoint"
+fi
+
+echo $serverCommand
+
+generate_update_start_post_data()
+{
+  cat <<EOF
+{
+  "mac": "$deviceId",
+  "proxy_version": "$version",
+  "status": "update-ended"
+}
+EOF
+}
+
+echo "Server Ping parameters S:$server D:$deviceId V:$version "
+echo $serverCommand
+statusCode=$(curl -i \
+-H "Accept: application/json" \
+-H "Content-Type:application/json" \
+-X POST --data "$(generate_update_start_post_data)" "$serverCommand" --write-out %{http_code} --trace-ascii - ) #--silent --output /dev/null ) 
+
+echo "ping update-ended statusCode:$statusCode"
+
+echo "enable and start dp-device-proxy.service"
+systemctl enable dp-device-proxy.service
+systemctl start dp-device-proxy.service

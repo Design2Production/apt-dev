@@ -101,13 +101,17 @@ And you should see something like
 
 Along with some additional recent logs.
 
-The installation automatically adds a daily cron job to check for and automatically update the proxy at 3am to the latest published version. To check it has been correctly added to the cron system
+## Updates
+Use the standard apt update system to the latest version
 <pre>
-run-parts --test /etc/cron.daily
+sudo apt update
+sudo apt install dp-device-proxy
 </pre>
-And the output list should contain
+
+And to a specific version
 <pre>
-/etc/cron.daily/dp-device-proxy-auto-update
+sudo apt update
+sudo apt install dp-device-proxy=1.7.5-5
 </pre>
 
 ## Post Installation

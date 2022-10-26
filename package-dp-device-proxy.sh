@@ -107,9 +107,7 @@ echo "${dataFolder}data.json" \
 cp preinst $packagingDebianFolder/preinst
 chmod 775 $packagingDebianFolder/preinst
 
-echo "systemctl enable dp-device-proxy.service
-systemctl start dp-device-proxy.service" \
-> $packagingDebianFolder/postinst
+cp postinst $packagingDebianFolder/postinst
 chmod 775 $packagingDebianFolder/postinst
 
 dpkg-deb --build $packagingFolder/$fullPackageName $destinationFolder/$fullPackageName.deb
