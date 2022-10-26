@@ -123,10 +123,22 @@ Version: 1.7.5-5
 Architecture: amd64
 Maintainer: Design to Production <support@d-p.com.au>
 Filename: amd64/dp-device-proxy_1.7.5_5_amd64.deb
-Size: 42222496
-MD5sum: b044c0d927d45f5a7fd6844862f0a1c4
-SHA1: 89682c2b715dc42ed25cdda54433148ac67d0ce6
-SHA256: 2229365179fa91365ee827bd2e1804422eb385de3bfffa3711fe9da92c8cd552
+Size: 42221044
+MD5sum: a92fd603bdf706275542f77ff9135f4e
+SHA1: c862f4b44e299c9d1ac3c24612c1bfd4d78d4cfd
+SHA256: 07d677dd4f7f6e024e34b97d89f1b64422795c4331320cfee5c75fa18119cd7e
+Homepage: http://d-p.com.au
+Description: DP Device Proxy Application
+
+Package: dp-device-proxy
+Version: 1.7.5-6
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: amd64/dp-device-proxy_1.7.5_6_amd64.deb
+Size: 42222080
+MD5sum: 3551d661f03b30163812e3a3a7ec9586
+SHA1: 23469b7ca4b43c5b4d035e2e3e8ba50cdcdc151d
+SHA256: 342f9cbad046d5dc05a0a4e7bd18ae62d7d1c675650ba656db9c735b7057644c
 Homepage: http://d-p.com.au
 Description: DP Device Proxy Application
 
