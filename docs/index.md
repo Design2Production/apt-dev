@@ -26,28 +26,28 @@ Next execute the installation script
 
 Shopper Indoor testing
 <pre>
-sudo sh ./install-dp-device-proxy.sh testing Staging DPEMS-V1_DBV2
+sudo sh ./install-dp-device-proxy.sh testing Staging DPEMS-V1_DBV2 new smg-pc-mac-address
 </pre>
 
 Shopper Outdoor testing
 <pre>
-sudo sh ./install-dp-device-proxy.sh testing Staging DPEMS-V2
+sudo sh ./install-dp-device-proxy.sh testing Staging DPEMS-V2 new smg-pc-mac-address
 </pre>
 
 Shopper Indoor producton
 <pre>
-sudo sh ./install-dp-device-proxy.sh stable Production DPEMS-V1_DBV2
+sudo sh ./install-dp-device-proxy.sh stable Production DPEMS-V1_DBV2 new smg-pc-mac-address
 </pre>
 
 Shopper Outdoor production
 <pre>
-sudo sh ./install-dp-device-proxy.sh stable Production DPEMS-V2
+sudo sh ./install-dp-device-proxy.sh stable Production DPEMS-V2 new smg-pc-mac-address
 </pre>
 
 Allowed parameters.
 
 <pre>
-sudo sh ./install-dp-device-proxy.sh stable|testing Production|Staging DPEMS-V1|DPEMS-V1_DBV2|DPEMS-V1_DBV3|DPEMS-V1_FANEXT|DPEMS-V2
+sudo sh ./install-dp-device-proxy.sh stable|testing Production|Staging DPEMS-V1|DPEMS-V1_DBV2|DPEMS-V1_DBV3|DPEMS-V1_FANEXT|DPEMS-V2 new|oldInstallationFolder deviceId
 </pre>
 
 The arguments being passed in are:
@@ -66,6 +66,13 @@ Hardware Configuration:
 - DPEMS-V1_DBV3
 - DPEMS-V1_FANEXT
 - DPEMS-V2
+
+Installation Type:
+- new
+- ***old Installation Folder***
+
+Device Id:
+- unique device Id, usually the name of the pc or mac address
 
 Use the arguments based on the device you are installing the proxy on.
 
