@@ -109,7 +109,7 @@ echo "... done."
 if [ "$installation" = "new" ] ; then
    port='/dev/ttyUSB0'
    daughterBoardPort='/dev/ttyUSB1'
-   deviceAddress='192.168.64.3'
+   deviceAddress='http://192.168.64.3:8000'
    deviceId="$newDeviceId"
    lcdTurnOnSchedule=''
    lcdTurnOffSchedule=''
