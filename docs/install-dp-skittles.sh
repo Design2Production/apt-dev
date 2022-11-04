@@ -88,6 +88,8 @@ echo '[Unit]
 [Service]
     Environment=''"DISPLAY=:0"
     Environment="XAUTHORITY=/run/user/1000.mutter-Xwaylandauth.HAQIS1"
+    Environment="XDG_RUNTIME_DIR=/run/user/1000"
+    Environment="PULSE_RUNTIME_PATH=/run/user/1000/pulse/"
     WorkingDirectory=/usr/lib/'$applicationName'
     ExecStart=/usr/lib/'$applicationName/$executableName'
     User=dp
