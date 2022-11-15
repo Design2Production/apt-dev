@@ -75,10 +75,10 @@ Version: 1.0.0-7
 Architecture: amd64
 Maintainer: Design to Production <support@d-p.com.au>
 Filename: amd64/dp-mdb-payment-processor_1.0.0_7_amd64.deb
-Size: 30334412
-MD5sum: 57b32af96f37408d007ca92df2eedcdf
-SHA1: 1db9a939b7714a24569b9f51fa87ca9a21d3cd47
-SHA256: 91940a980dd82648fa3d87165c14ffc74230b0131cfc0ea8618b203276170df0
+Size: 30337632
+MD5sum: 3f323b4cd122447ee421af0681106e29
+SHA1: 2be3030eec4ccb4bf5e173cc372efa0cf28a10d1
+SHA256: 76d8bf97a3cd01cd0166f3c0757edc98d341b984da702a2c9032287925f53c60
 Homepage: http://d-p.com.au
 Description: DP MdbPaymentProcessor.WebApi Application
 
