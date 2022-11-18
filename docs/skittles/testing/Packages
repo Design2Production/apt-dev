@@ -178,6 +178,18 @@ SHA256: 741d9888c4a9386d36b3e6908381ae89ba4144b68bfe152826f5f14f0008f336
 Homepage: http://d-p.com.au
 Description: DP Skittles.x86_64 Application
 
+Package: dp-skittles
+Version: 1.1.5-0
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: amd64/dp-skittles_1.1.5_0_amd64.deb
+Size: 36705716
+MD5sum: 1e2ff719795cc63c788ec74e7098711a
+SHA1: 0bab3fb9ab9f624f5d08e77d24dd6700804745da
+SHA256: 485d869e721f53dc6557c0202c928dcb8456fe2b0d634ff00e978f1d43e590cd
+Homepage: http://d-p.com.au
+Description: DP Skittles.x86_64 Application
+
 Package: dp-skittles-vending-edge-server
 Version: 1.0.0-0
 Architecture: amd64
