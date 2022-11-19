@@ -6,10 +6,10 @@ echo
 releaseName="$1"
 test="$2"
 
-if [ "$releaseName" = "stable" ] || [ "$releaseName" = "testing" ] ; then
+if [ "$releaseName" = "stable" ] || [ "$releaseName" = "testing" ] || [ "$releaseName" = "prototype" ] ; then
    echo "Release Name          : $releaseName"
 else
-   echo "Release Name must be specified: stable | testing"
+   echo "Release Name must be specified: stable | testing | prototype"
    exit 1
 fi
 

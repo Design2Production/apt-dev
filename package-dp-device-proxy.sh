@@ -17,10 +17,10 @@ else
    echo "Source Folder    : $sourceFolder"
 fi
 
-if [ "$repoName" = "dpems" ] || [ "$repoName" = "skittles" ] ; then
+if [ "$repoName" = "dpems" ] ; then
    echo "Repo             : $repoName"
 else
-   echo "Repo must be specified: dpems | skittles"
+   echo "Repo must be specified: dpems"
    exit 1
 fi
 

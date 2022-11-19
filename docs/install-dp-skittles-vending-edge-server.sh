@@ -20,10 +20,10 @@ else
    exit 1
 fi
 
-if [ "$releaseName" = "stable" ] || [ "$releaseName" = "testing" ] ; then
+if [ "$releaseName" = "stable" ] || [ "$releaseName" = "testing" ] || [ "$releaseName" = "prototype" ] ; then
    echo "Release Name          : $releaseName"
 else
-   echo "Release Name must be specified: stable | testing"
+   echo "Release Name must be specified: stable | testing | prototype"
    exit 1
 fi
 
