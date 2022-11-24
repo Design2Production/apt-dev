@@ -35,6 +35,18 @@ Homepage: http://d-p.com.au
 Description: DP Skittles.x86_64 Application
 
 Package: dp-skittles
+Version: 1.1.5-11
+Architecture: amd64
+Maintainer: Design to Production <support@d-p.com.au>
+Filename: amd64/dp-skittles_1.1.5_11_amd64.deb
+Size: 21151156
+MD5sum: d84d1b511d343d0de41649606f7f1fce
+SHA1: 2b66fb91b22674f507f73ba4a382815e91b3ea79
+SHA256: 4297b594ecb4faa7a0b39ffd636ab3fcf47e5e0c138c4244478fb13887591832
+Homepage: http://d-p.com.au
+Description: DP Skittles.x86_64 Application
+
+Package: dp-skittles
 Version: 1.1.5-3
 Architecture: amd64
 Maintainer: Design to Production <support@d-p.com.au>
