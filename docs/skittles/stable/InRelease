@@ -1,0 +1,37 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Date: Fri, 25 Nov 2022 06:09:45 +0000
+MD5Sum:
+ bb610ce48438e31c4a52e30c38aaac9f              409 Packages
+ b34ccca16a44a5b73c3d35e328babf2d              314 Packages.gz
+ a04a607accd737fb9e829abe6ab107b7               38 Release
+SHA1:
+ fbc760abf40855bd7b34507613015e8a703c4beb              409 Packages
+ 258e44b2528926d31cef7969a3280ae4cd4dab6a              314 Packages.gz
+ 69b58300a103bdc7bb1cdece8b766208e1403ab7               38 Release
+SHA256:
+ c658fc4c8dfbec1739e9666e65f547b466e9e40396fbeb3d1bcbd8a6cd9e0782              409 Packages
+ cabbf48d5f4cbd7ef556170a325f2aa923ef69618edd62b49531a389317ad90f              314 Packages.gz
+ 918caa3392659ce219278921f5f37b38a5cde5d1d8c7fcfb2c95dbcdbb98d048               38 Release
+SHA512:
+ 08bb2f327c01a7834406cb4ca356d6f2ad566963eec06f2b6645a496cd2b3f42d5c33bb5b15f9bf8b89abfacf161714939b34d01b5f22b467658df5e1070e388              409 Packages
+ a116196aea58f0f7ce0d630c7a34d3ceae117c2380ab290a9dd20ff0ea31625716b3bb846c1fa1eccfa88c23dcba3b85d20779881cf3dffecee9a493445806df              314 Packages.gz
+ 3af77fd3acb5f935f0809e6db6ce2a32579afd9cb83494a628d2d24ab7a2432cfdf61014273b98ed8feefc15018e01d931d951675d41125f8c7b638db5e5c591               38 Release
+-----BEGIN PGP SIGNATURE-----
+
+iQJHBAEBCgAxFiEEb+sC2++LnaisubCjldIoIxUJf9QFAmOAXCkTHHN1cHBvcnRA
+ZC1wLmNvbS5hdQAKCRCV0igjFQl/1J87D/sF/sfhZru51LneI2hHdSY7xY7lX8VB
+dbSds2DXz4JhG157a3VOAT+6XtQo8dlbuKwAnP6evynwZNVcEbz50tf8Pkh9gOtP
+GFJijeIAtGiE8oeF/Jl5VWu8JuN43kI+F8lvEepY2JYo0VVsvaMozKz7TPGvw708
+Ih6A/x5ly9EpZKVSDPctoaVjrPZMN0/8SRFwwzVfrgJHzSoWAChiOJulrJOPH+ZN
+lisc4aEabBoIDBS40dhZCOkDKYwAfjfH2QpA4sq8IgQzh9KdFKJt29Qfij8N4ADx
+qyQi5RaxgIJEKHuT/o0dN8K9u8iRO+koiSdKcgG92xGS9fpBA3qgEF+Dzdtz0SQ6
+DmekGI4cnmU4vKnOphnE8doowdyJk/UpB7h4iIqhDG+JaYRURaLzIF+dT6G3dalB
+dW6Te5t6CGXdkcejrTwiq2IcE3L+3xd4+gMTA9K8F4oTtdXz9Z96PR3YciKAeM6C
+j5wDmGo0lGaH53JoAEis/QRj3yCKT0mOBaCdgChFU8Gz3akd0/siMs9Lcx8zbopD
+ltV2aP6Ojxi7RKB+W01o9pJjKfSjZgdFf90CV5eDqgErFVL+W7kDPsHSwKoqZXMt
+YmO1Vs4t0884C1Sva7HhUJrYgtwDEgz09HnNAt79MNu8DbjYxgI6c53r28ZIAelR
+o00ySbJET4xcLQ==
+=Ki7B
+-----END PGP SIGNATURE-----
