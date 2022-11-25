@@ -91,6 +91,12 @@ find "$packagingAppFolder/Skittles_Data/StreamingAssets/" -type f -iname "*.sh" 
 
 mkdir -p $packagingDebianFolder
 
+echo "#!/bin/bash
+rm -f -r ~/.config/unity3d/*
+/usr/lib/dp-skittles/Skittles.x86_64"\
+> $packagingAppFolder/launch-skittles.sh
+chmod 777 "$packagingAppFolder/launch-skittles.sh"
+
 echo "Package: $packageName
 Version: $version
 Maintainer: Design to Production <support@d-p.com.au>
